@@ -18,7 +18,7 @@
     <dialog type="splash" open>
       <img id="FudgeStoryLogo" theme="light" /> <!-- use "light" or "dark" -->
       <p>
-        Design your splash screen here. Reposition and rescale the logo above, but do not remove.
+        
       </p>
     </dialog>
 
@@ -26,13 +26,25 @@
 
 
     <speech>
-      <name>The name of the character speaking</name>
-      <content>The text the character says</content>
+      <name>Visual Novel</name>
+      <content></content>
     </speech>
 
     <dialog type="text">
       The content of a page of text for reading
     </dialog>
+
+    <!-- Damage Meterbar -->
+    <div type="interface">
+      <input id="scoreForDamage" type="text" value="Damage" disabled>
+      <!-- für value der Skala; Füllung -->
+      <meter id="damageMeter" name="damageScore" min="0" max="50" disabled></meter> <!--  -->
+      <script>
+        document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = true);
+        document.getElementById("scoreForDamage").style.display = "none";
+      </script>
+
+    </div>
 
   </scene>
 </body>
