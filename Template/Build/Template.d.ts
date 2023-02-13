@@ -12,11 +12,9 @@ declare namespace Template {
         novelRadio: boolean;
         novelFavFood: boolean;
         novelPet: boolean;
-        novelMilitaryTime: boolean;
-        novelMilitaryTimeExtra: boolean;
-        novelDude: boolean;
-        novelNoDude: boolean;
-        novelEnding1: boolean;
+        novelSurvivors: boolean;
+        novelLewis: boolean;
+        novelNoLewis: boolean;
         novelEnding2: boolean;
         pickedUpRations: boolean;
         pickedUpBat: boolean;

@@ -61,8 +61,6 @@ namespace Template {
         await ƒS.Speech.tell(characters.Player, "No...");
         await ƒS.Speech.tell(characters.Narrator, "You should have followed your gut. But you didn't and now Lewis is gone.");
 
-
-
         // Choice: Kill the Zombie or leave it
         let killLewis = {
             killHim: "Give him mercy.",
@@ -124,9 +122,11 @@ namespace Template {
                         With one last look at Lewis you continue on towards the rendezvous.");
                         await ƒS.Speech.tell(characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await ƒS.Speech.tell(characters.Player, "He deserves to be remembered.");
-                        await ƒS.Text.print("Memory about Lewis + extra memory");
-                        // add journal entry
-                        dataForSave.novelMilitaryTimeExtra = true;
+                        await ƒS.Text.print("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+                        We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+                        over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+                        the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
+                        dataForSave.novelNoLewis = true;
                         break;
 
                     case whichWeapon.withGun:
@@ -144,9 +144,11 @@ namespace Template {
                         at Lewis you run into the direction of the rendezvous");
                         await ƒS.Speech.tell(characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await ƒS.Speech.tell(characters.Player, "He deserves to be remembered.");
-                        await ƒS.Text.print("Memory about Lewis");
-                        // add journal entry
-                        dataForSave.novelMilitaryTime = true;
+                        await ƒS.Text.print("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+                        We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+                        over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+                        the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
+                        dataForSave.novelNoLewis = true;
                         break;
                 }
 
@@ -163,9 +165,11 @@ namespace Template {
                 await ƒS.Speech.tell(characters.Narrator, "With one last look at Lewis you run into the direction of the rendezvous");
                 await ƒS.Speech.tell(characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                 await ƒS.Speech.tell(characters.Player, "He at least deserves that I remember him.");
-                await ƒS.Text.print("Memory about Lewis");
-                // add journal entry
-                dataForSave.novelMilitaryTime = true;
+                await ƒS.Text.print("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+                We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+                over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+                the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
+                dataForSave.novelNoLewis = true;
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.update(0.2);
                 return "rendezvous";

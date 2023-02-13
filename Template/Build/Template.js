@@ -6,7 +6,7 @@ var Template;
         - Aim for the head => Their brains are their weakness <br><br> - Use melee weapons if possible => Sound attracts them <br><br> - Don't give up", "Day 13, <br><br>\
         It's been a few days since the apocalypse started. Everyday it's getting harder to find survivors and I'm starting to lose hope. Is this going to be the end of humanity?",
             "Day 26, <br><br> I lost all contact to the military headquarters. Were they overrun or is something interferring with the radios? I really hope it's the latter... \
-        I don't know how good our chances are if we lost the military."];
+        I don't know how good our chances are if we lost the military.", "Day 45, I don't know if I can keep doing this..."];
         // Alle Journalseiten in einer if-Abfrage abfragen mit boolschen Werten in dataForSave; z.B. iSayYes = false und nachdem man 'Yes' gewählt hat wird iSayYes = true und die richtige Novelpage wird angezeigt
         let current = 0;
         let numberAquired = 0;
@@ -15,7 +15,7 @@ var Template;
             pages.push("I suddenly woke up in the apocalypse and I have trouble remembering how it all started or who I really am. I faintly remember \
             being in the military, but not for how long or if I left it before everything went to hell. <br><br><br><br> Name: " + Template.dataForSave.nameProtagonist +
                 "<br><br> Age: ?? <br><br> Occupation: Soldier?/Ex-Soldier? ");
-            numberAquired += 3;
+            numberAquired += 4;
         }
         if (Template.dataForSave.novelRadio == true) {
             pages.push("<strong>Extraction </strong><br><br><br> The Military is organizing one last effort to safe some survivors. I wonder where they are bringing us \
@@ -38,29 +38,46 @@ var Template;
             She was my first and only pet and I'll continue to remember her fondly.");
             numberAquired += 1;
         }
-        if (Template.dataForSave.novelMilitaryTime == true) {
-            pages.push("...");
+        if (Template.dataForSave.novelSurvivors == true) {
+            pages.push("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+            VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+            but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+            tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+            so well for the robbers. In the end they got no money and landed in jail.");
             numberAquired += 1;
         }
-        if (Template.dataForSave.novelMilitaryTimeExtra == true) {
-            pages.push("...");
+        if (Template.dataForSave.novelLewis == true) {
+            pages.push("I just met someone from my past, his name is Lewis. We served together in the military and after he got shot in the \
+            shoulder in a battle I saved him and after that we became close, because he kept following me around. I guess I kind of just warmed up \
+            to him and it became normal to seek each other out.");
             numberAquired += 1;
         }
-        if (Template.dataForSave.novelDude == true) {
-            pages.push("...");
-            numberAquired += 1;
-        }
-        if (Template.dataForSave.novelNoDude == true) {
-            pages.push("...");
-            numberAquired += 1;
-        }
-        if (Template.dataForSave.novelEnding1 == true) {
-            pages.push("...");
+        if (Template.dataForSave.novelNoLewis == true) {
+            pages.push("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+            We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+            over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+            the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
             numberAquired += 1;
         }
         if (Template.dataForSave.novelEnding2 == true) {
-            pages.push("...");
-            numberAquired += 1;
+            pages.push("Day 47 <br><br> We finally reached the cabin Lewis was talking about. It's a days walk from the city, but he was right \
+            it's in the middle of nowhere and also hidden from all main roads. At first we followed the main road leavig out of the city and \
+            came across quite a few zombies. But halfway through we started heading through the forest and fields and found just a few stray zombies \
+            roaming around. <br><br> The cabin itself is quite cozy, but it's obvious that no one's been here in months. It's too big for just us \
+            two, but maybe someone will join us in time. And he was right, there's enough food here to last us a few weeks. But Lewis says he's \
+            already has a plan. I trust him. It'll be some time, until this place will feel like home, but tidying everything up will be the first step.");
+            pages.push("Day 54 <br><br> We're still busy with the place and I haven't found much time to write. But I finally know what Lewis' plan \
+            was: He wants to plant some vegetables and fruits. He got the seeds from the garden center in the center, that's why he was there when I \
+            found him. I have no idea about gardening, but he seems so know what he is doing.");
+            pages.push("Day 67 <br><br> It's peaceful here and not many zombies find their way all the way out here. <br><br> My \
+            memories are gradually returning and Lewis tries to fill in the blanks as good as he can. He has been a big help, not only in remembering \
+            but giving us a new place to call home and giving me a reason to keep fighting. <br><br> I remembered that I love fishing and we got lucky \
+            with a big lake not far from here. So fish is our main ingredient at the moment. Most of the time I cook, but Lewis helps from time to time \
+            He pretends that he's not had enough of fish yet, but I know he wouldn't mind a change. I hope the stuff we planted will be ready to harvest \
+            soon, then I could surprise him with his favourite dish. It's also getting time for another city run soon. Maybe we'll get lucky this time and \
+            find a functioning car. I don't mind the walk, but it can get tiring pretty quickly. Not that Lewis minds. He always loved walking. I wonder \
+            where he gets all the energy from...");
+            numberAquired += 3;
         }
         if (numberAquired > 0) {
             let changePage = { back: "previous", next: "next", done: "close" };
@@ -114,18 +131,15 @@ var Template;
         novelRadio: false,
         novelFavFood: false,
         novelPet: false,
-        novelMilitaryTime: false,
-        novelMilitaryTimeExtra: false,
-        novelDude: false,
-        novelNoDude: false,
-        novelEnding1: false,
+        novelSurvivors: false,
+        novelLewis: false,
+        novelNoLewis: false,
         novelEnding2: false,
         // Item
         pickedUpRations: false,
         pickedUpBat: false,
         pickedMeterScene: false,
         pickedAnimationScene: false,
-        // pickedInventoryScene: false,
         pickedChoice: false
     };
     Template.transition = {
@@ -145,10 +159,6 @@ var Template;
     };
     // Locations bzw. Backgrounds der Szenen
     Template.locations = {
-        // rundownAlley: {   // Kann unbenannt werden, Name der Location
-        //   name: "Rundown Alley",
-        //   background: "Images/Backgrounds/rundown_alley_night.png"
-        // },
         oldKitchen: {
             name: "Old Kitchen",
             background: "Images/Backgrounds/old_kitchen.png"
@@ -399,17 +409,17 @@ var Template;
         // Scene Hierarchy
         let scenes = [
             // { id: "Test", scene: testScene, name: "Test" },
-            // { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
-            // { id: "FirstScene", scene: firstScene, name: "First scene" },    // mit id kann man im Zusammenhang mit 'next' angeben, welche Szene als nächstes abgespielt wird
-            // { id: "residentialArea", scene: routeResidentialArea, name: "Residential area"},
-            // { id: "commercialArea", scene: routeCommercialArea, name: "Commercial area"},
-            // { id: "meetingSurvivors", scene: meetingSurvivors, name: "Meeting Survivors"},
-            // { id: "helpingTheSurvivors", scene: helpingTheSurvivors, name: "Helping the Survivors"},
-            // { id: "callForHelp", scene: callForHelp, name: "Call for help"},
-            // { id: "followCallForHelp", scene: followCallForHelp, name: "Follow the call for help"},
-            // { id: "ignoreCallForHelp", scene: ignoreCallForHelp, name: "Ignore the call for help"},
+            { id: "Prologue", scene: Template.prologue, name: "Prologue" },
+            { id: "FirstScene", scene: Template.firstScene, name: "First scene" },
+            { id: "residentialArea", scene: Template.routeResidentialArea, name: "Residential area" },
+            { id: "commercialArea", scene: Template.routeCommercialArea, name: "Commercial area" },
+            { id: "meetingSurvivors", scene: Template.meetingSurvivors, name: "Meeting Survivors" },
+            { id: "helpingTheSurvivors", scene: Template.helpingTheSurvivors, name: "Helping the Survivors" },
+            { id: "callForHelp", scene: Template.callForHelp, name: "Call for help" },
+            { id: "followCallForHelp", scene: Template.followCallForHelp, name: "Follow the call for help" },
+            { id: "ignoreCallForHelp", scene: Template.ignoreCallForHelp, name: "Ignore the call for help" },
             { id: "rendezvous", scene: Template.rendezvous, name: "Rendezvous" },
-            // { id: "goWithLewis", scene: goWithLewis, name: "Go with Lewis"},
+            { id: "goWithLewis", scene: Template.goWithLewis, name: "Go with Lewis" },
             { id: "goThroughSideStreet", scene: Template.goThroughSideStreet, name: "Go through side street" },
             { id: "goThroughSchoolyard", scene: Template.goThroughSchoolyard, name: "Go through schoolyard" },
             { id: "goodEnding1", scene: Template.goodEnding1, name: "Good Ending 1" },
@@ -630,8 +640,6 @@ var Template;
         document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
-        Template.dataForSave.nameProtagonist = "Malay"; // delete later
-        Template.characters.Player.name = Template.dataForSave.nameProtagonist;
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.otherStreet);
         await Template.ƒS.update(0.2);
@@ -805,9 +813,19 @@ var Template;
         switch (choiceKillZombieChild) {
             case killZombieChild.killZombieKid:
                 console.log("Kill the zombie child.");
+                await Template.ƒS.Character.hide(Template.characters.Player);
+                await Template.ƒS.Character.hide(Template.characters.Lewis);
+                await Template.ƒS.update(0.2);
+                await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(20, 100));
                 await Template.ƒS.Speech.tell(Template.characters.Player, "...");
-                await Template.ƒS.Speech.tell(Template.characters.Narrator, "");
-                // Player kills the zombie-child and places the body against the wall
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "You pull out your knife as you sneak to the zombie-child. It has its face turned away from \
+                you so it doesn't see you coming and you manage to step right up to it.");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "With a firm grip you hold onto its head so it can't turn around and as it struggles you \
+                ram your knife into its head. The struggling ceases and you carefully carry the lifeless body to place it against a wall and close \
+                its eyes. Then you pack away your knife.");
+                await Template.ƒS.Character.hide(Template.characters.Zombie);
+                await Template.ƒS.Speech.tell(Template.characters.Player, "You can rest now...");
+                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(35, 100));
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis lets you be for a minute, but then he takes hold of your hand and gently pulls \
                 you along.");
                 await Template.ƒS.Speech.tell(Template.characters.Lewis, "Come on, let's go.");
@@ -815,10 +833,13 @@ var Template;
             case killZombieChild.dontKillZombieKid:
                 console.log("Leave the zombie child be.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "The poor child...");
-                // Player can't kill the child and just watches it for a minute as it stumbles around 
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "You look at the child for a bit longer as it stumbles through the cafeteria with no \
+                goal. You couldn't kill it, even if wasn't human anymore.");
+                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(35, 100));
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis lets you be for a minute, but then he takes hold of your hand and gently pulls \
                 you along.");
                 await Template.ƒS.Speech.tell(Template.characters.Lewis, "Come on, let's go.");
+                await Template.ƒS.Character.hide(Template.characters.Zombie);
                 break;
         }
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "After some more walking you two reach the edge of the city. The destruction here is less severe. \
@@ -1041,7 +1062,7 @@ var Template;
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Lewis, "This way.");
         await Template.ƒS.Speech.tell(Template.characters.Player, "...");
-        await Template.ƒS.Speech.tell(Template.characters.Player, "You called me 'Rush'. Was he someone you knew?"); // or "why?"
+        await Template.ƒS.Speech.tell(Template.characters.Player, "You called me 'Rush'. Why?");
         await Template.ƒS.Character.hide(Template.characters.Lewis);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(75, 100));
@@ -1075,7 +1096,13 @@ var Template;
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy, Template.ƒS.positionPercent(75, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Lewis, "Because you finally started opening up after that! And I realized how nice it was to be at your side.");
-        await Template.ƒS.Speech.tell(Template.characters.Player, "Alright, which way do you want to take? We could go through a side street or through the school. \
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Can you wait for a moment?");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Of course");
+        await Template.ƒS.Text.print("I just met someone from my past, his name is Lewis. We served together in the military and after he got shot in the \
+        shoulder in a battle I saved him and after that we became close, because he kept following me around. I guess I kind of just warmed up \
+        to him and it became normal to seek each other out.");
+        Template.dataForSave.novelLewis = true;
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Alright, which way do you want to take? We could go through a side street or through the school. \
         Both will take us to the edge of the city. It's your call.");
         // Choice: Which way to go
         let whichWayWithLewis = {
@@ -1112,15 +1139,27 @@ var Template;
         console.log("Scene: Good Ending 1");
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.cabinInForest);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "Several weeks later");
-        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy2, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy2, Template.ƒS.positionPercent(35, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Player, "It's peaceful here and not many zombies find their way all the way out here.");
-        // some more text and code
-        // One last journal entry
+        await Template.ƒS.Speech.tell(Template.characters.Player, "...");
+        await Template.ƒS.Text.print("Day <br><br> It's peaceful here and not many zombies find their way all the way out here. <br><br> My \
+        memories are gradually returning and Lewis tries to fill in the blanks as good as he can. He has been a big help, not only in remembering \
+        but giving us a new place to call home and giving me a reason to keep fighting. <br><br> I remembered that I love fishing and we got lucky \
+        with a big lake not far from here. So fish is our main ingredient at the moment. Most of the time I cook, but Lewis helps from time to time \
+        He pretends that he's not had enough of fish yet, but I know he wouldn't mind a change. I hope the stuff we planted will be ready to harvest \
+        soon, then I could surprise him with his favourite dish. It's also getting time for another city run soon. Maybe we'll get lucky this time and \
+        find a functioning car. I don't mind the walk, but it can get tiring pretty quickly. Not that Lewis minds. He always loved walking. I wonder \
+        where he gets all the energy from...");
+        Template.dataForSave.novelEnding2 = true;
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy2, Template.ƒS.positionPercent(65, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Hey Rush, you ready to go yet? You promised to teach me how to fish.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Yeah, I'm done. Let's go.");
         await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "GOOD ENDING 1!");
         await Template.ƒS.update(0.2);
@@ -1143,8 +1182,14 @@ var Template;
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral2, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Player, "It's peaceful here and I haven't seen a single zombie in weeks.");
-        // some more text and code
-        // Another journal entry, maybe two or three
+        await Template.ƒS.Speech.tell(Template.characters.Player, "The first few days were quite hectic. We all had to get settled in on this island and it was hard \
+        to shake the mindset that danger lurks around every corner. Sometimes the peace and quiet is even making me jittery.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I'm still missing a big part of my memory, but apparently I knew how to \
+        fish. So that and cooking are the parts I'm responsible for in our community. At least it's keeping me busy.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I still think about my past life sometimes, even though they told us to forget all about it. \
+        Not that it's hard to forget about a past you can't even remember. But I decided to stop writing my journal. No use remembering an old life.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I'd rather put all my concentration on this new life and do everything I can to keep it this happy \
+        and peaceful.");
         await Template.ƒS.Character.hide(Template.characters.Player);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "GOOD ENDING 2!");
@@ -1227,7 +1272,7 @@ var Template;
                     await Template.ƒS.Character.show(Template.characters.SurvivorChild, Template.characters.SurvivorChild.pose.survivorChild, Template.ƒS.positionPercent(50, 100));
                     await Template.ƒS.update(0.2);
                     await Template.ƒS.Speech.tell(Template.characters.SurvivorChild, "This is for you, Mister.");
-                    // she hands the player a flower
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "She hands you a beautiful white flower.");
                     await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you, I will take good care of it.");
                     await Template.ƒS.Speech.tell(Template.characters.Narrator, "She giggles again and runs back behind the man's legs.");
                     await Template.ƒS.Character.hide(Template.characters.SurvivorChild);
@@ -1240,9 +1285,12 @@ var Template;
                     await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you. And you stay safe as well.");
                     await Template.ƒS.Character.hide(Template.characters.SurvivorM);
                     await Template.ƒS.Speech.tell(Template.characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
-                    // write journal entry
-                    await Template.ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
-                        for some days, or about the time he saved a hostage.]");
+                    Template.dataForSave.novelSurvivors = true;
+                    await Template.ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+                    VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+                    so well for the robbers. In the end they got no money and landed in jail.");
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     return "callForHelp";
@@ -1259,9 +1307,12 @@ var Template;
                     await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you. And you stay safe as well.");
                     await Template.ƒS.Character.hide(Template.characters.SurvivorM);
                     await Template.ƒS.Speech.tell(Template.characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
-                    // write journal entry
-                    await Template.ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
-                        for some days, or about the time he saved a hostage.]");
+                    Template.dataForSave.novelSurvivors = true;
+                    await Template.ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+                    VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+                    so well for the robbers. In the end they got no money and landed in jail.");
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     return "callForHelp";
@@ -1286,9 +1337,12 @@ var Template;
                     await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you. And you stay safe as well.");
                     await Template.ƒS.Character.hide(Template.characters.SurvivorM);
                     await Template.ƒS.Speech.tell(Template.characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
-                    // write journal entry
-                    await Template.ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
-                        for some days, or about the time he saved a hostage.]");
+                    Template.dataForSave.novelSurvivors = true;
+                    await Template.ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+                    VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+                    so well for the robbers. In the end they got no money and landed in jail.");
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     return "callForHelp";
@@ -1412,9 +1466,11 @@ var Template;
                         With one last look at Lewis you continue on towards the rendezvous.");
                         await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await Template.ƒS.Speech.tell(Template.characters.Player, "He deserves to be remembered.");
-                        await Template.ƒS.Text.print("Memory about Lewis + extra memory");
-                        // add journal entry
-                        Template.dataForSave.novelMilitaryTimeExtra = true;
+                        await Template.ƒS.Text.print("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+                        We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+                        over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+                        the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
+                        Template.dataForSave.novelNoLewis = true;
                         break;
                     case whichWeapon.withGun:
                         console.log("Kill him with the gun.");
@@ -1431,9 +1487,11 @@ var Template;
                         at Lewis you run into the direction of the rendezvous");
                         await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await Template.ƒS.Speech.tell(Template.characters.Player, "He deserves to be remembered.");
-                        await Template.ƒS.Text.print("Memory about Lewis");
-                        // add journal entry
-                        Template.dataForSave.novelMilitaryTime = true;
+                        await Template.ƒS.Text.print("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+                        We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+                        over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+                        the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
+                        Template.dataForSave.novelNoLewis = true;
                         break;
                 }
                 await Template.ƒS.Character.hide(Template.characters.Player);
@@ -1447,9 +1505,11 @@ var Template;
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "With one last look at Lewis you run into the direction of the rendezvous");
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "He at least deserves that I remember him.");
-                await Template.ƒS.Text.print("Memory about Lewis");
-                // add journal entry
-                Template.dataForSave.novelMilitaryTime = true;
+                await Template.ƒS.Text.print("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+                We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+                over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+                the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
+                Template.dataForSave.novelNoLewis = true;
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.update(0.2);
                 return "rendezvous";

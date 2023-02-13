@@ -9,9 +9,6 @@ namespace Template {
 
         ƒS.Speech.setTickerDelays(30, 5000);
 
-        dataForSave.nameProtagonist = "Malay";      // delete later
-        characters.Player.name = dataForSave.nameProtagonist;
-
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.otherStreet);
         await ƒS.update(0.2);

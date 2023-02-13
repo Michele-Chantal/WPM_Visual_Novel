@@ -14,11 +14,9 @@ namespace Template {
     novelRadio: false,
     novelFavFood: false,
     novelPet: false,
-    novelMilitaryTime: false,
-    novelMilitaryTimeExtra: false,
-    novelDude: false,
-    novelNoDude: false,
-    novelEnding1: false,
+    novelSurvivors: false,
+    novelLewis: false,
+    novelNoLewis: false,
     novelEnding2: false,
     // Item
     pickedUpRations: false,
@@ -26,7 +24,6 @@ namespace Template {
 
     pickedMeterScene: false,
     pickedAnimationScene: false,
-    // pickedInventoryScene: false,
     pickedChoice: false
   };
 
@@ -52,10 +49,6 @@ namespace Template {
 
   // Locations bzw. Backgrounds der Szenen
   export let locations = {
-    // rundownAlley: {   // Kann unbenannt werden, Name der Location
-    //   name: "Rundown Alley",
-    //   background: "Images/Backgrounds/rundown_alley_night.png"
-    // },
     oldKitchen: {
       name: "Old Kitchen",
       background: "Images/Backgrounds/old_kitchen.png"
@@ -313,17 +306,17 @@ namespace Template {
     // Scene Hierarchy
     let scenes: ƒS.Scenes = [
       // { id: "Test", scene: testScene, name: "Test" },
-      // { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
-      // { id: "FirstScene", scene: firstScene, name: "First scene" },    // mit id kann man im Zusammenhang mit 'next' angeben, welche Szene als nächstes abgespielt wird
-      // { id: "residentialArea", scene: routeResidentialArea, name: "Residential area"},
-      // { id: "commercialArea", scene: routeCommercialArea, name: "Commercial area"},
-      // { id: "meetingSurvivors", scene: meetingSurvivors, name: "Meeting Survivors"},
-      // { id: "helpingTheSurvivors", scene: helpingTheSurvivors, name: "Helping the Survivors"},
-      // { id: "callForHelp", scene: callForHelp, name: "Call for help"},
-      // { id: "followCallForHelp", scene: followCallForHelp, name: "Follow the call for help"},
-      // { id: "ignoreCallForHelp", scene: ignoreCallForHelp, name: "Ignore the call for help"},
+      { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
+      { id: "FirstScene", scene: firstScene, name: "First scene" },    // mit id kann man im Zusammenhang mit 'next' angeben, welche Szene als nächstes abgespielt wird
+      { id: "residentialArea", scene: routeResidentialArea, name: "Residential area"},
+      { id: "commercialArea", scene: routeCommercialArea, name: "Commercial area"},
+      { id: "meetingSurvivors", scene: meetingSurvivors, name: "Meeting Survivors"},
+      { id: "helpingTheSurvivors", scene: helpingTheSurvivors, name: "Helping the Survivors"},
+      { id: "callForHelp", scene: callForHelp, name: "Call for help"},
+      { id: "followCallForHelp", scene: followCallForHelp, name: "Follow the call for help"},
+      { id: "ignoreCallForHelp", scene: ignoreCallForHelp, name: "Ignore the call for help"},
       { id: "rendezvous", scene: rendezvous, name: "Rendezvous"},
-      // { id: "goWithLewis", scene: goWithLewis, name: "Go with Lewis"},
+      { id: "goWithLewis", scene: goWithLewis, name: "Go with Lewis"},
       { id: "goThroughSideStreet", scene: goThroughSideStreet, name: "Go through side street"},
       { id: "goThroughSchoolyard", scene: goThroughSchoolyard, name: "Go through schoolyard"},
 

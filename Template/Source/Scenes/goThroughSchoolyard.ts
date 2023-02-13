@@ -7,7 +7,7 @@ namespace Template {
         document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
         document.getElementById("scoreForDamage").style.display = "";
 
-        ƒS.Speech.setTickerDelays(30, 5000); 
+        ƒS.Speech.setTickerDelays(30, 5000);
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.schoolyard);
@@ -22,7 +22,7 @@ namespace Template {
         it out of sheer luck or on accident, it'll be our safest bet.");
         await ƒS.Speech.tell(characters.Lewis, "And even if zombies are there it won't be that many. There's not much there for them, so they'll \
         mostly ignore it.");
-        await ƒS.Speech.tell(characters.Player, "I see.");   
+        await ƒS.Speech.tell(characters.Player, "I see.");
         await ƒS.Speech.tell(characters.Player, "You know, you never told my why you called me 'Rush'.");
         await ƒS.Character.hide(characters.Lewis);
         await ƒS.update(0.2);
@@ -55,7 +55,7 @@ namespace Template {
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Lewis, "I'm so glad to have met you. Back then and now.");
         await ƒS.Speech.tell(characters.Player, "...");
-        
+
         await ƒS.Location.show(locations.school);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "When you reach the school you hear something that sounds like crying.");
@@ -93,12 +93,22 @@ namespace Template {
 
         let choiceKillZombieChild = await ƒS.Menu.getInput(killZombieChild, "choiceCSSClass");
 
-        switch(choiceKillZombieChild) {
+        switch (choiceKillZombieChild) {
             case killZombieChild.killZombieKid:
                 console.log("Kill the zombie child.");
+                await ƒS.Character.hide(characters.Player);
+                await ƒS.Character.hide(characters.Lewis);
+                await ƒS.update(0.2);
+                await ƒS.Character.show(characters.Player, characters.Player.pose.sad, ƒS.positionPercent(20, 100));
                 await ƒS.Speech.tell(characters.Player, "...");
-                await ƒS.Speech.tell(characters.Narrator, "");
-                // Player kills the zombie-child and places the body against the wall
+                await ƒS.Speech.tell(characters.Narrator, "You pull out your knife as you sneak to the zombie-child. It has its face turned away from \
+                you so it doesn't see you coming and you manage to step right up to it.");
+                await ƒS.Speech.tell(characters.Narrator, "With a firm grip you hold onto its head so it can't turn around and as it struggles you \
+                ram your knife into its head. The struggling ceases and you carefully carry the lifeless body to place it against a wall and close \
+                its eyes. Then you pack away your knife.");
+                await ƒS.Character.hide(characters.Zombie);
+                await ƒS.Speech.tell(characters.Player, "You can rest now...");
+                await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.sad, ƒS.positionPercent(35, 100));
                 await ƒS.Speech.tell(characters.Narrator, "Lewis lets you be for a minute, but then he takes hold of your hand and gently pulls \
                 you along.");
                 await ƒS.Speech.tell(characters.Lewis, "Come on, let's go.");
@@ -107,10 +117,13 @@ namespace Template {
             case killZombieChild.dontKillZombieKid:
                 console.log("Leave the zombie child be.");
                 await ƒS.Speech.tell(characters.Player, "The poor child...");
-                // Player can't kill the child and just watches it for a minute as it stumbles around 
+                await ƒS.Speech.tell(characters.Narrator, "You look at the child for a bit longer as it stumbles through the cafeteria with no \
+                goal. You couldn't kill it, even if wasn't human anymore.");
+                await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.sad, ƒS.positionPercent(35, 100));
                 await ƒS.Speech.tell(characters.Narrator, "Lewis lets you be for a minute, but then he takes hold of your hand and gently pulls \
                 you along.");
                 await ƒS.Speech.tell(characters.Lewis, "Come on, let's go.");
+                await ƒS.Character.hide(characters.Zombie);
                 break;
 
         }

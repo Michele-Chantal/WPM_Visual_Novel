@@ -18,7 +18,7 @@ namespace Template {
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Lewis, "This way.");
         await ƒS.Speech.tell(characters.Player, "...");
-        await ƒS.Speech.tell(characters.Player, "You called me 'Rush'. Was he someone you knew?");     // or "why?"
+        await ƒS.Speech.tell(characters.Player, "You called me 'Rush'. Why?");
         await ƒS.Character.hide(characters.Lewis);
         await ƒS.update(0.2);
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.sad, ƒS.positionPercent(75, 100));
@@ -52,7 +52,13 @@ namespace Template {
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.happy, ƒS.positionPercent(75, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Lewis, "Because you finally started opening up after that! And I realized how nice it was to be at your side.");
-        await ƒS.Speech.tell(characters.Player, "Alright, which way do you want to take? We could go through a side street or through the school. \
+        await ƒS.Speech.tell(characters.Player, "Can you wait for a moment?");
+        await ƒS.Speech.tell(characters.Lewis, "Of course");
+        await ƒS.Text.print("I just met someone from my past, his name is Lewis. We served together in the military and after he got shot in the \
+        shoulder in a battle I saved him and after that we became close, because he kept following me around. I guess I kind of just warmed up \
+        to him and it became normal to seek each other out.");
+        dataForSave.novelLewis = true;
+        await ƒS.Speech.tell(characters.Lewis, "Alright, which way do you want to take? We could go through a side street or through the school. \
         Both will take us to the edge of the city. It's your call.");
 
 

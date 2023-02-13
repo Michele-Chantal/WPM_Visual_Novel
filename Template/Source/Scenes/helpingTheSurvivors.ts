@@ -80,7 +80,7 @@ namespace Template {
                     await ƒS.Character.show(characters.SurvivorChild, characters.SurvivorChild.pose.survivorChild, ƒS.positionPercent(50, 100));
                     await ƒS.update(0.2);
                     await ƒS.Speech.tell(characters.SurvivorChild, "This is for you, Mister.");
-                    // she hands the player a flower
+                    await ƒS.Speech.tell(characters.Narrator, "She hands you a beautiful white flower.");
                     await ƒS.Speech.tell(characters.Player, "Thank you, I will take good care of it.");
                     await ƒS.Speech.tell(characters.Narrator, "She giggles again and runs back behind the man's legs.");
                     await ƒS.Character.hide(characters.SurvivorChild);
@@ -93,9 +93,12 @@ namespace Template {
                     await ƒS.Speech.tell(characters.Player, "Thank you. And you stay safe as well.");
                     await ƒS.Character.hide(characters.SurvivorM);
                     await ƒS.Speech.tell(characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
-                    // write journal entry
-                    await ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
-                        for some days, or about the time he saved a hostage.]");
+                    dataForSave.novelSurvivors = true;
+                    await ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+                    VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+                    so well for the robbers. In the end they got no money and landed in jail.");
                     await ƒS.Character.hide(characters.Player);
                     await ƒS.update(0.2);
                     return "callForHelp";
@@ -113,9 +116,12 @@ namespace Template {
                     await ƒS.Speech.tell(characters.Player, "Thank you. And you stay safe as well.");
                     await ƒS.Character.hide(characters.SurvivorM);
                     await ƒS.Speech.tell(characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
-                    // write journal entry
-                    await ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
-                        for some days, or about the time he saved a hostage.]");
+                    dataForSave.novelSurvivors = true;
+                    await ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+                    VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+                    so well for the robbers. In the end they got no money and landed in jail.");
                     await ƒS.Character.hide(characters.Player);
                     await ƒS.update(0.2);
                     return "callForHelp";
@@ -141,9 +147,12 @@ namespace Template {
                     await ƒS.Speech.tell(characters.Player, "Thank you. And you stay safe as well.");
                     await ƒS.Character.hide(characters.SurvivorM);
                     await ƒS.Speech.tell(characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
-                    // write journal entry
-                    await ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
-                        for some days, or about the time he saved a hostage.]");
+                    dataForSave.novelSurvivors = true;
+                    await ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+                    VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+                    so well for the robbers. In the end they got no money and landed in jail.");
                     await ƒS.Character.hide(characters.Player);
                     await ƒS.update(0.2);
                     return "callForHelp";

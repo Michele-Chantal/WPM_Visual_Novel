@@ -4,8 +4,8 @@ namespace Template {
         let pages: string[] = ["<strong> How to survive the Zombie Apocalypse: </strong><br><br><br> - Avoid getting bitten => Infection will spread like that <br><br> \
         - Aim for the head => Their brains are their weakness <br><br> - Use melee weapons if possible => Sound attracts them <br><br> - Don't give up", "Day 13, <br><br>\
         It's been a few days since the apocalypse started. Everyday it's getting harder to find survivors and I'm starting to lose hope. Is this going to be the end of humanity?",
-            "Day 26, <br><br> I lost all contact to the military headquarters. Were they overrun or is something interferring with the radios? I really hope it's the latter... \
-        I don't know how good our chances are if we lost the military."];
+        "Day 26, <br><br> I lost all contact to the military headquarters. Were they overrun or is something interferring with the radios? I really hope it's the latter... \
+        I don't know how good our chances are if we lost the military.", "Day 45, I don't know if I can keep doing this..."];
 
         // Alle Journalseiten in einer if-Abfrage abfragen mit boolschen Werten in dataForSave; z.B. iSayYes = false und nachdem man 'Yes' gewählt hat wird iSayYes = true und die richtige Novelpage wird angezeigt
         let current: number = 0;
@@ -16,7 +16,7 @@ namespace Template {
             pages.push("I suddenly woke up in the apocalypse and I have trouble remembering how it all started or who I really am. I faintly remember \
             being in the military, but not for how long or if I left it before everything went to hell. <br><br><br><br> Name: " + dataForSave.nameProtagonist +
                 "<br><br> Age: ?? <br><br> Occupation: Soldier?/Ex-Soldier? ");
-            numberAquired += 3;
+            numberAquired += 4;
         }
 
         if (dataForSave.novelRadio == true) {
@@ -43,34 +43,49 @@ namespace Template {
             numberAquired += 1;
         }
 
-        if (dataForSave.novelMilitaryTime == true) {
-            pages.push("...");
+        if (dataForSave.novelSurvivors == true) {
+            pages.push("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
+            VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
+            but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+            tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
+            so well for the robbers. In the end they got no money and landed in jail.");
             numberAquired += 1;
         }
 
-        if (dataForSave.novelMilitaryTimeExtra == true) {
-            pages.push("...");
+        if (dataForSave.novelLewis == true) {
+            pages.push("I just met someone from my past, his name is Lewis. We served together in the military and after he got shot in the \
+            shoulder in a battle I saved him and after that we became close, because he kept following me around. I guess I kind of just warmed up \
+            to him and it became normal to seek each other out.");
             numberAquired += 1;
         }
 
-        if (dataForSave.novelDude == true) {
-            pages.push("...");
-            numberAquired += 1;
-        }
-
-        if (dataForSave.novelNoDude == true) {
-            pages.push("...");
-            numberAquired += 1;
-        }
-
-        if (dataForSave.novelEnding1 == true) {
-            pages.push("...");
+        if (dataForSave.novelNoLewis == true) {
+            pages.push("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
+            We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+            over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
+            the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
             numberAquired += 1;
         }
 
         if (dataForSave.novelEnding2 == true) {
-            pages.push("...");
-            numberAquired += 1;
+            pages.push("Day 47 <br><br> We finally reached the cabin Lewis was talking about. It's a days walk from the city, but he was right \
+            it's in the middle of nowhere and also hidden from all main roads. At first we followed the main road leavig out of the city and \
+            came across quite a few zombies. But halfway through we started heading through the forest and fields and found just a few stray zombies \
+            roaming around. <br><br> The cabin itself is quite cozy, but it's obvious that no one's been here in months. It's too big for just us \
+            two, but maybe someone will join us in time. And he was right, there's enough food here to last us a few weeks. But Lewis says he's \
+            already has a plan. I trust him. It'll be some time, until this place will feel like home, but tidying everything up will be the first step.");
+            pages.push("Day 54 <br><br> We're still busy with the place and I haven't found much time to write. But I finally know what Lewis' plan \
+            was: He wants to plant some vegetables and fruits. He got the seeds from the garden center in the center, that's why he was there when I \
+            found him. I have no idea about gardening, but he seems so know what he is doing.");
+            pages.push("Day 67 <br><br> It's peaceful here and not many zombies find their way all the way out here. <br><br> My \
+            memories are gradually returning and Lewis tries to fill in the blanks as good as he can. He has been a big help, not only in remembering \
+            but giving us a new place to call home and giving me a reason to keep fighting. <br><br> I remembered that I love fishing and we got lucky \
+            with a big lake not far from here. So fish is our main ingredient at the moment. Most of the time I cook, but Lewis helps from time to time \
+            He pretends that he's not had enough of fish yet, but I know he wouldn't mind a change. I hope the stuff we planted will be ready to harvest \
+            soon, then I could surprise him with his favourite dish. It's also getting time for another city run soon. Maybe we'll get lucky this time and \
+            find a functioning car. I don't mind the walk, but it can get tiring pretty quickly. Not that Lewis minds. He always loved walking. I wonder \
+            where he gets all the energy from...");
+            numberAquired += 3;
         }
 
 
