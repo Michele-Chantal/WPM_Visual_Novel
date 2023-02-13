@@ -10,29 +10,58 @@ namespace Template {
         ƒS.Speech.setTickerDelays(30, 5000);
 
         ƒS.Speech.hide();
-        await ƒS.Location.show(locations.oldStreet);
+        await ƒS.Location.show(locations.otherStreet);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Narrator, "[Somewhere outside]");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
-        await ƒS.Speech.tell(characters.Player, "I'll ignore the call for help.");
+        await ƒS.Speech.tell(characters.Player, "I'm sorry whoever you are, but I can't risk my only chance.");
 
         if (dataForSave.pickedUpRations == false) {
-            // Player gets dizzy and stumbles, scratches his arm on some protruding metal
+            await ƒS.Speech.tell(characters.Narrator, "You keep walking for some minutes, when suddenly your head feels like you're underwater \
+            and your sight gets blurry for a moment. You stumble and are just barely able to catch yourself on a wall but while doing so your hand \
+            manages to scratch against a stray protruding nail there.");
             await ƒS.Character.hide(characters.Player);
             await ƒS.update(0.2);
             await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
             await ƒS.update(0.2);
-            await ƒS.Speech.tell(characters.Player, "Ah, fuck.");
             dataForSave.damageScore += 5;
+            await ƒS.Speech.tell(characters.Player, "Ah, fuck.");
+            await ƒS.Speech.tell(characters.Player, "I didn't notice how dehydrated I was.");
+            await ƒS.Character.hide(characters.Player);
+            await ƒS.update(0.2);
+            await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
+            await ƒS.update(0.2);
+            await ƒS.Speech.tell(characters.Player, "I should bandage the wound. Don't want it to get infected.");
+        } else {
+            await ƒS.Speech.tell(characters.Narrator, "You keep walking for a while and come across a few zombies. You alternate between taking them \
+            down stealthily or just sneaking by undetected.");
         }
 
+        await ƒS.Speech.tell(characters.Player, "Huh?");
+        await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.zombie, ƒS.positionPercent(70, 100));
+        await ƒS.update(0.2);
+        await ƒS.Speech.tell(characters.Narrator, "This zombie is different from the others, you just know it. But it takes you a moment to pinpoint \
+        exactly why, as a memory hits you like a bucket of cold water.");
+        await ƒS.Character.hide(characters.Lewis);
         await ƒS.Character.hide(characters.Player);
         await ƒS.update(0.2);
-        await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
+        await ƒS.Character.show(characters.Others, characters.Others.pose.memory, ƒS.positionPercent(50, 100));
         await ƒS.update(0.2);
+        await ƒS.Speech.tell(characters.Narrator, "The face of the zombie- the man, bloody, almost as much as in the present. You drag him behind a \
+        wall with one hand, your gun forgotten in the other. He got shot in the shoulder and you're trying to stop the bleeding.");
+        await ƒS.Speech.tell(characters.Narrator, "You remember his name, <i>Lewis</i>, and telling him to stay awake. You remember him clinging \
+        to your arm like you were his lifeline.");
+        await ƒS.Speech.tell(characters.Narrator, "For a short moment you wonder if he survived, but you <i>know</i> that he did, because after that \
+        he decided to stick by your side. The man who got your back, your best friend, your...");
+        await ƒS.Character.hide(characters.Others);
+        await ƒS.update(0.2);
+        await ƒS.Character.show(characters.Player, characters.Player.pose.sad, ƒS.positionPercent(30, 100));
+        await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.zombie, ƒS.positionPercent(70, 100));
+        await ƒS.update(0.2);
+        await ƒS.Speech.tell(characters.Player, "No...");
+        await ƒS.Speech.tell(characters.Narrator, "You should have followed your gut. But you didn't and now Lewis is gone.");
 
-        // Sees Lewis as a zombie and remembers him from his time in the military
+
 
         // Choice: Kill the Zombie or leave it
         let killLewis = {
@@ -58,36 +87,70 @@ namespace Template {
                 switch (choicewhichWeapon) {
                     case whichWeapon.withKnife:
                         console.log("Kill him with the knife.");
-                        await ƒS.Speech.tell(characters.Player, "I'm sorry...");
-                        // Player tries to kill Zombie-Lewis with the knife but they have to get up close to do it
-                        // Either he is sloppy because it takes more time and gets hurt or he remembers something when he is close enough to really see Lewis' face
+                        await ƒS.Speech.tell(characters.Player, "I am so sorry...");
+                        await ƒS.Speech.tell(characters.Narrator, "You take out your knife and get close to Lewis. But you're scared you won't make \
+                        it to the rendezvous in time so you make a mistake and accidentally kick an empty bottle that was lying just behind the zombie.")
                         dataForSave.damageScore += 5;
+                        if (dataForSave.damageScore == 50) {
+                            await ƒS.Speech.tell(characters.Narrator, "Zombie-Lewis turns around and before you can react he goes for your neck.");
+                            await ƒS.Character.hide(characters.Player);
+                            await ƒS.update(0.2);
+                            await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+                            await ƒS.update(0.2);
+                            await ƒS.Speech.tell(characters.Player, "AHHH!");
+                            await ƒS.Character.hide(characters.Player);
+                            await ƒS.update(0.2);
+                            await ƒS.Speech.tell(characters.Narrator, "His teeth sink into your neck and as he pulls back you can feel your skin rip. \
+                            Your screams soon turn into a choked gurgle as your mouth fills with blood. And your last thought before the whole world goes\
+                            dark is...");
+                            await ƒS.Speech.tell(characters.Player, "<i>I was so close...</i>");
+                            return "badEnding";
+                        } else {
+                            await ƒS.Speech.tell(characters.Narrator, "Zombie-Lewis turns around and manages to scratch open your arm, before you finally plunge the \
+                            knife deep into his head. His body slumps to the ground");
+                            await ƒS.Character.hide(characters.Player);
+                            await ƒS.update(0.2);
+                            await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+                            await ƒS.update(0.2);
+                            await ƒS.Speech.tell(characters.Player, "Shit.");
+                        }
+
                         await ƒS.Character.hide(characters.Player);
                         await ƒS.update(0.2);
-                        await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+                        await ƒS.Character.show(characters.Player, characters.Player.pose.sad, ƒS.positionPercent(30, 100));
                         await ƒS.update(0.2);
-                        await ƒS.Speech.tell(characters.Player, "Shit.");
-                        // Manages to kill Zombie-Lewis
-                        await ƒS.Character.hide(characters.Player);
-                        await ƒS.update(0.2);
-                        await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
-                        await ƒS.update(0.2);
+                        await ƒS.Speech.tell(characters.Player, "...");
+                        await ƒS.Speech.tell(characters.Narrator, "You simply stare at him for a moment, before you remember that you should to leave. \
+                        With one last look at Lewis you continue on towards the rendezvous.");
+                        await ƒS.Speech.tell(characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await ƒS.Speech.tell(characters.Player, "He deserves to be remembered.");
                         await ƒS.Text.print("Memory about Lewis + extra memory");
+                        // add journal entry
                         dataForSave.novelMilitaryTimeExtra = true;
                         break;
 
                     case whichWeapon.withGun:
                         console.log("Kill him with the gun.");
-                        await ƒS.Speech.tell(characters.Player, "I'm sorry...");
-                        // Player shoots Zombie-Lewis in the head and leaves before other zombies can arrive
+                        await ƒS.Character.hide(characters.Player);
+                        await ƒS.update(0.2);
+                        await ƒS.Character.show(characters.Player, characters.Player.pose.sad, ƒS.positionPercent(30, 100));
+                        await ƒS.update(0.2);
+                        await ƒS.Speech.tell(characters.Player, "I am so sorry...");
+                        await ƒS.Speech.tell(characters.Narrator, "You take out your gun and train it towards his head with slightly shaking hands. \
+                        You hesitate and suddenly his gaze turns to you and for split seconds it almost seems like he recognizes you. But then he \
+                        charges towards you with a snarl and you pull the trigger just before he can come too close.");
+                        await ƒS.Speech.tell(characters.Narrator, "His lifeless body hits the ground and you simply stare at him for a moment, before \
+                        you remember that you have to leave, because every zombie in the vicinity will be lured here by the gunshot. With one last look \
+                        at Lewis you run into the direction of the rendezvous");
+                        await ƒS.Speech.tell(characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await ƒS.Speech.tell(characters.Player, "He deserves to be remembered.");
                         await ƒS.Text.print("Memory about Lewis");
+                        // add journal entry
                         dataForSave.novelMilitaryTime = true;
                         break;
                 }
 
-                
+
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.update(0.2);
                 return "rendezvous";
@@ -96,8 +159,12 @@ namespace Template {
             case killLewis.dontKillHim:
                 console.log("Don't kill Zombie-Lewis.");
                 await ƒS.Speech.tell(characters.Player, "I can't kill him...");
-                await ƒS.Speech.tell(characters.Player, "But he deserves that I at least remember him.");
+                await ƒS.Speech.tell(characters.Player, "Please forgive me...");
+                await ƒS.Speech.tell(characters.Narrator, "With one last look at Lewis you run into the direction of the rendezvous");
+                await ƒS.Speech.tell(characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
+                await ƒS.Speech.tell(characters.Player, "He at least deserves that I remember him.");
                 await ƒS.Text.print("Memory about Lewis");
+                // add journal entry
                 dataForSave.novelMilitaryTime = true;
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.update(0.2);

@@ -122,6 +122,7 @@ var Template;
         novelEnding2: false,
         // Item
         pickedUpRations: false,
+        pickedUpBat: false,
         pickedMeterScene: false,
         pickedAnimationScene: false,
         // pickedInventoryScene: false,
@@ -176,9 +177,17 @@ var Template;
             name: "Old Street",
             background: "Images/Backgrounds/old_street.png"
         },
+        schoolyard: {
+            name: "Schoolyard",
+            background: "Images/Backgrounds/schoolyard.png"
+        },
         school: {
             name: "School",
             background: "Images/Backgrounds/school.png"
+        },
+        cafeteria: {
+            name: "cafeteria",
+            background: "Images/Backgrounds/cafeteria.png"
         },
         sideStreet: {
             name: "Side Street",
@@ -188,10 +197,26 @@ var Template;
             name: "Living Room",
             background: "Images/Backgrounds/living_room.png"
         },
+        otherStreet: {
+            name: "Other Street",
+            background: "Images/Backgrounds/other_street.png"
+        },
         cabinInForest: {
             name: "Cabin in the forest",
             background: "Images/Backgrounds/cabin_in_forest.jpg"
-        }
+        },
+        dark: {
+            name: "Bad Ending 1",
+            background: "Images/Backgrounds/dark.png"
+        },
+        base: {
+            name: "Base",
+            background: "Images/Backgrounds/base.png"
+        },
+        beach: {
+            name: "Beach",
+            background: "Images/Backgrounds/beach.png"
+        },
     };
     // Die Charaktere
     Template.characters = {
@@ -227,37 +252,65 @@ var Template;
                 sad: "Images/Characters/lewis_sad.png",
                 sad2: "Images/Characters/lewis_sad2.png",
                 angry: "Images/Characters/lewis_angry.png",
-                surprised: "Images/Characters/lewis_surprised.png"
+                surprised: "Images/Characters/lewis_surprised.png",
+                worried: "Images/Characters/lewis_worried.png",
+                zombie: "Images/Characters/lewis_zombie.png"
             }
         },
         Radio: {
             name: "Radio",
             origin: Template.ƒS.ORIGIN.BOTTOMCENTER,
-            pose: {}
+            pose: {
+                radio: "Images/Items/radio.png",
+            }
         },
-        Survivor: {
-            name: "Survivor",
+        SurvivorM: {
+            name: "Man",
             origin: Template.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
                 survivorM: "Images/Characters/survivorM.png",
+            }
+        },
+        SurvivorF: {
+            name: "Woman",
+            origin: Template.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
                 survivorF: "Images/Characters/survivorF.png",
+            }
+        },
+        SurvivorChild: {
+            name: "Child",
+            origin: Template.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                survivorChild: "Images/Characters/survivorChild.png"
             }
         },
         Zombie: {
             name: "Zombie",
             origin: Template.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
-                zombieM: "Images/Characters/zombie.png",
-                zombieF: "Images/Characters/zombie.png",
-                child: "Images/Characters/zombie.png"
+                zombieM: "Images/Characters/zombieM.png",
+                zombieF: "Images/Characters/zombieF.png",
+                zombieChild: "Images/Characters/zombieChild.png"
+            }
+        },
+        Soldier: {
+            name: "Soldier",
+            origin: Template.ƒS.ORIGIN.BOTTOMCENTER,
+            pose: {
+                soldier: "Images/Characters/soldier.png"
             }
         },
         Others: {
             name: "Others",
             origin: Template.ƒS.ORIGIN.BOTTOMCENTER,
             pose: {
-                radio: "Images/Items/radio.png",
-                catPic: "Images/Items/cat_pic.png"
+                catPic: "Images/Items/cat_pic.png",
+                golfClub: "Images/Items/golf_club.png",
+                memory: "Images/Items/memory.png",
+                // flower: "Images/Items/flower.png",       still unsure about this one
+                // rations: "Images/Items/rations.png",      still unsure about this one
+                // journal: "Images/Items/journal.png",      still unsure about this one
             }
         }
     };
@@ -355,12 +408,13 @@ var Template;
             // { id: "callForHelp", scene: callForHelp, name: "Call for help"},
             // { id: "followCallForHelp", scene: followCallForHelp, name: "Follow the call for help"},
             // { id: "ignoreCallForHelp", scene: ignoreCallForHelp, name: "Ignore the call for help"},
-            // { id: "rendezvous", scene: rendezvous, name: "Rendezvous"},
+            { id: "rendezvous", scene: Template.rendezvous, name: "Rendezvous" },
             // { id: "goWithLewis", scene: goWithLewis, name: "Go with Lewis"},
-            // { id: "goThroughMainStreet", scene: goThroughMainStreet, name: "Go through main street"},
             { id: "goThroughSideStreet", scene: Template.goThroughSideStreet, name: "Go through side street" },
+            { id: "goThroughSchoolyard", scene: Template.goThroughSchoolyard, name: "Go through schoolyard" },
             { id: "goodEnding1", scene: Template.goodEnding1, name: "Good Ending 1" },
             { id: "goodEnding2", scene: Template.goodEnding2, name: "Good Ending 2" },
+            { id: "badEnding1", scene: Template.badEnding1, name: "Bad Ending 1" },
             { id: "emptyScene", scene: Template.empty, name: "END" }
         ];
         let uiElement = document.querySelector("[type=interface]");
@@ -378,6 +432,20 @@ var Template;
 })(Template || (Template = {}));
 var Template;
 (function (Template) {
+    async function badEnding1() {
+        console.log("Scene: Bad Ending 1");
+        Template.ƒS.Speech.setTickerDelays(30, 5000);
+        Template.ƒS.Speech.hide();
+        await Template.ƒS.Location.show(Template.locations.dark);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "GAME OVER!");
+        await Template.ƒS.update(0.2);
+        return "emptyScene";
+    }
+    Template.badEnding1 = badEnding1;
+})(Template || (Template = {}));
+var Template;
+(function (Template) {
     async function callForHelp() {
         console.log("Scene: Call for help");
         Template.dataForSave.pickedMeterScene = true;
@@ -385,28 +453,50 @@ var Template;
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.otherStreet);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "[Somewhere outside]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Player, "Oh, a call for help through the radio");
+        await Template.ƒS.Speech.tell(Template.characters.Radio, "'<i>Hello, can anyone hear me?</i>'");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.thinking, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Hmm?");
+        await Template.ƒS.Character.show(Template.characters.Radio, Template.characters.Radio.pose.radio, Template.ƒS.positionPercent(75, 100)); // model still missing
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Radio, "'<i>If anyone can hear this, please, I need some help</i>'");
+        await Template.ƒS.Speech.tell(Template.characters.Radio, "'<i>I'm at the garten center on Maple Avenue, the west back entrance. Zombie are trying to break into the room \
+        I'm holed up in but I can't leave, because it's not looking better on the outside.</i>'");
+        await Template.ƒS.Speech.tell(Template.characters.Radio, "'<i>Whoever can hear me, please, hurry. I don't know how much longer I can hold out.</i>'");
+        await Template.ƒS.Speech.tell(Template.characters.Radio, "'<i>I repeat. I'm at the garten center on Maple Avenue, the west back entrance.</i>'");
+        await Template.ƒS.Speech.tell(Template.characters.Radio, "'<i>There's a group of zombies just by the back entrance, so if someone is coming, please be careful. Over.</i>'");
+        await Template.ƒS.Character.hide(Template.characters.Radio);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Should I go help? But it's in the opposite direction I need to go. If I'll follow the call I won't make it to the rendezvous \
+        in time.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "In my mind I <i>know</i> should ignore the call, but why do I feel my body hesitating?");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Shit, I gotta decide.");
         // Choice: Follow the call for help or ignore it
-        let followCall = {
-            residentialArea: "Ignore call for help.",
-            commercialArea: "Follow the call for help.",
+        let radioCallForHelp = {
+            followRadioCall: "Ignore call for help.",
+            ignoreRadioCall: "Follow the call for help.",
         };
-        // Ignore call for help and continue to meetingpoint
-        let choiceFollowCall = await Template.ƒS.Menu.getInput(followCall, "choiceCSSClass");
-        switch (choiceFollowCall) {
-            case followCall.residentialArea:
+        let choiceradioCallForHelp = await Template.ƒS.Menu.getInput(radioCallForHelp, "choiceCSSClass");
+        switch (choiceradioCallForHelp) {
+            case radioCallForHelp.followRadioCall:
                 console.log("Follow the call for help.");
-                await Template.ƒS.Speech.tell(Template.characters.Player, "Something is teling me to follow the call.");
+                await Template.ƒS.Speech.tell(Template.characters.Player, "Something is telling me to follow the call.");
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.update(0.2);
                 return "followCallForHelp";
                 break;
-            case followCall.commercialArea:
+            case radioCallForHelp.ignoreRadioCall:
                 console.log("Ignore the call for help.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "I have to keep going. If I try to help now, I won't make it in time.");
                 await Template.ƒS.Character.hide(Template.characters.Player);
@@ -440,7 +530,7 @@ var Template;
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "A sound from your right draws your attention just as you leave the apartment.");
         await Template.ƒS.Speech.tell(Template.characters.Player, "Hello?");
-        await Template.ƒS.Character.show(Template.characters.Zombie, Template.characters.Zombie.pose.zombie, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.Character.show(Template.characters.Zombie, Template.characters.Zombie.pose.zombieM, Template.ƒS.positionPercent(70, 100));
         // await ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Zombie, "Uaaaaaghhrrrr");
         // await ƒS.update(0.2);
@@ -540,67 +630,217 @@ var Template;
         document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
+        Template.dataForSave.nameProtagonist = "Malay"; // delete later
+        Template.characters.Player.name = Template.dataForSave.nameProtagonist;
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.otherStreet);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[Somewhere outside]");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[At the garden center]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Player, "I'll follow the call for help");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You round the corner to the west entrance and immediately notice four zombies clawing at the backdoor.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Just four zombies? I should be able to deal with them. Just need to find something elevated to \
+        stay out of their reach, just to be safe.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I could climb on that hedge, should be high enough.");
+        if (Template.dataForSave.pickedUpBat == true) {
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "You climb on the hedge and make sure that your footing is steady before you pull out your golf club.");
+        }
+        else if (Template.dataForSave.pickedUpBat == false) {
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "You climb on the hedge and make sure that your footing is steady before you pull out your knife.");
+        }
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Hey, zombies! I'm over here.");
+        await Template.ƒS.Character.show(Template.characters.Zombie, Template.characters.Zombie.pose.zombieM, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Zombie, "Huuuurgghhhhh.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "All the zombies turn to your voice and begin to stumble their way towards you. Out of the \
+        corner of your eyes you see the door open, but you keep your focus on the zombies.");
+        if (Template.dataForSave.pickedUpBat == true) {
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "As soon as the first zombie is in reach, you swing your club and smash its head in. With a \
+            satisfying 'thump' its body slumps to the ground. The next one uses that moment to grab for your leg, but you kick it away and deal \
+            a few deals to its head.");
+        }
+        else if (Template.dataForSave.pickedUpBat == false) {
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "As soon as the first zombie is in reach, you stab your knife into its head. While you try \
+            to pull your knife out of the first zombie's brain, the next one uses that moment to grab for your leg. But you manage to free your knife \
+            in time to ram it through its head.");
+        }
+        await Template.ƒS.Character.show(Template.characters.Zombie, Template.characters.Zombie.pose.zombieM, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Character.hide(Template.characters.Zombie);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You turn to the last two zombies only to find them already dead on the ground with a blond haired \
+        man standing over them, who is already staring at you.");
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.surprised, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Rush? It's you.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You climb down from the hedge and walk closer to the man.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Who?");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.worried, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "But, I thought-");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Sorry, forget that. I'm Lewis, thanks for your help. Thought I'd have to risk fighting my way out of this. \
+        Was real lucky that you decided to help me.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I'm " + Template.dataForSave.nameProtagonist + ". And yea, you're welcome. Couldn't just ignore your call. \
+        Because, you know, you needed help and...");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You know you're rambling, but as soon as you saw him you felt like you had seen him somewhere before. \
+        And you couldn't just tell him that a gut feeling made you come here.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "I hope I didn't inconvenience you or seperate you from your group.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "No, I'm... traveling alone.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Great!");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "I mean, I was planing to leave the city, I know of a cabin some way from the city. \
+        It belonged to my uncle and he mostly used it to get away from the all the stress and work, so it should be stocked. If you don't have any \
+        other plans you could come with me.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "But you don't even know me.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "You saved me. I know that you're a good person.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "...");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "So what do you say? Don't worry, it's not a ploy to lure you into a dark alley and steal your cool \
+        hoodie or something like that. Sorry, bad joke.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Okay, I'll go with you.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Alright! Then what are we waiting for? Let's go.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        return "goWithLewis";
     }
     Template.followCallForHelp = followCallForHelp;
 })(Template || (Template = {}));
 var Template;
 (function (Template) {
-    async function goThroughMainStreet() {
-        console.log("Scene: Go through main street");
+    async function goThroughSchoolyard() {
+        console.log("Scene: Go through schoolyard");
         Template.dataForSave.pickedMeterScene = true;
         document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.schoolyard);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[On the main street]");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[In a schoolyard]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.neutral, Template.ƒS.positionPercent(75, 100));
         await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "We just have to go through here and another street then we're out of the city.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "How do you know the cabin will be safe?");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "It's not marked on any maps and quite a ways from the nearest road. Unless someone stumbled onto \
+        it out of sheer luck or on accident, it'll be our safest bet.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "And even if zombies are there it won't be that many. There's not much there for them, so they'll \
+        mostly ignore it.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I see.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "You know, you never told my why you called me 'Rush'.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "It's actually kinda silly, really. One day off-base we were watching a movie about superheroes. The \
+        main characters were this duo, they were complete opposites but they worked together like they were two halves of a whole. And out of joke \
+        we started calling each other as their hero names and it kinda just stuck. One of them was this quiet reserved guy, that prefered working \
+        alone, but cared about his team. Like you. That was Rush. And the other one was this outgoing, happy-go-lucky guy, that got along with \
+        everyone. Kinda like me. That was-");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "[...]?");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Yes, Exactly! Do you remember?");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Bits and pieces, but I do remember watching the movie with you. You kept talking about it for weeks \
+        after that. It was kind of endearing.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Don't act like you didn't enjoy it too. You loved it! And spending time with me.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Yeah.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.surprised, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Huh?");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I never really said it back then and that was a mistake. So I'm sorry and thank you.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "I'm so glad to have met you. Back then and now.");
         await Template.ƒS.Speech.tell(Template.characters.Player, "...");
-        // insert Gespräch mit Lewis here (...)
-        // they come across a zombie child that seems to be crying (sounds like growl-crying) and have to decide whether to give it mercy or leave it be
+        await Template.ƒS.Location.show(Template.locations.school);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you reach the school you hear something that sounds like crying.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Shh, do you hear that?");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.surprised, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "That sounds like crying, but something feels off. It's coming from the cafeteria.");
+        await Template.ƒS.Location.show(Template.locations.school);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.surprised, Template.ƒS.positionPercent(20, 100));
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.surprised, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.Character.show(Template.characters.Zombie, Template.characters.Zombie.pose.zombieChild, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "A child...?");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "What should we do?");
         // Choice: Kill the zombie child or don't
         let killZombieChild = {
-            killZombieKid: "Side street",
-            dontKillZombieKid: "Main street",
+            killZombieKid: "Kill it",
+            dontKillZombieKid: "Don't kill it",
         };
-        let choiceWhichStreet = await Template.ƒS.Menu.getInput(killZombieChild, "choiceCSSClass");
-        switch (choiceWhichStreet) {
+        let choiceKillZombieChild = await Template.ƒS.Menu.getInput(killZombieChild, "choiceCSSClass");
+        switch (choiceKillZombieChild) {
             case killZombieChild.killZombieKid:
                 console.log("Kill the zombie child.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "...");
-                await Template.ƒS.Character.hide(Template.characters.Player);
-                await Template.ƒS.update(0.2);
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "");
+                // Player kills the zombie-child and places the body against the wall
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis lets you be for a minute, but then he takes hold of your hand and gently pulls \
+                you along.");
+                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Come on, let's go.");
                 break;
             case killZombieChild.dontKillZombieKid:
                 console.log("Leave the zombie child be.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "The poor child...");
+                // Player can't kill the child and just watches it for a minute as it stumbles around 
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis lets you be for a minute, but then he takes hold of your hand and gently pulls \
+                you along.");
+                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Come on, let's go.");
                 break;
         }
-        // They continue on and reach the edge of the city
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "After some more walking you two reach the edge of the city. The destruction here is less severe. \
+        Some broken cars and corpses are strewn across the road, but in contrast to the city it seems almost peaceful. Just a bit more and \
+        your new life can begin. Soon you can rest.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
         return "goodEnding1";
     }
-    Template.goThroughMainStreet = goThroughMainStreet;
+    Template.goThroughSchoolyard = goThroughSchoolyard;
 })(Template || (Template = {}));
 var Template;
 (function (Template) {
     async function goThroughSideStreet() {
-        console.log("Scene: Go through side street");
+        console.log("Scene: Go through side street.");
         Template.dataForSave.pickedMeterScene = true;
         document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.sideStreet);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "[In a side street]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
@@ -612,19 +852,51 @@ var Template;
         it out of sheer luck or on accident, it'll be our safest bet.");
         await Template.ƒS.Speech.tell(Template.characters.Player, "And even if zombies are there it won't be that many. There's not much there for them, so they'll \
         mostly ignore it.");
-        // insert Gespräch mit Lewis here (...)
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I see.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "You know, you never told my why you called me 'Rush'.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "It's actually kinda silly, really. One day off-base we were watching a movie about superheroes. The \
+        main characters were this duo, they were complete opposites but they worked together like they were two halves of a whole. And out of joke \
+        we started calling each other as their hero names and it kinda just stuck. One of them was this quiet reserved guy, that prefered working \
+        alone, but cared about his team. Like you. That was Rush. And the other one was this outgoing, happy-go-lucky guy, that got along with \
+        everyone. Kinda like me. That was-");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "[...]?"); // have to find a name!!
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Yes, Exactly! Do you remember?");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Bits and pieces, but I do remember watching the movie with you. You kept talking about it for weeks \
+        after that. It was kind of endearing.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Don't act like you didn't enjoy it too. You loved it! And spending time with me.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Yeah.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.surprised, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Huh?");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I never really said it back then and that was a mistake. So I'm sorry and thank you.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "I'm so glad to have met you. Back then and now.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "...");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.surprised, Template.ƒS.positionPercent(20, 100));
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.surprised, Template.ƒS.positionPercent(40, 100));
-        await Template.ƒS.Character.show(Template.characters.Survivor, Template.characters.Survivor.pose.survivorM, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.Character.show(Template.characters.SurvivorF, Template.characters.SurvivorF.pose.survivorF, Template.ƒS.positionPercent(75, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "About halfway through the street you see a woman running towards you. Her clothes are torn\
         and bloody, and she is cradling her bleeding arm against her chest, but she appears to be human.");
-        await Template.ƒS.Speech.tell(Template.characters.Survivor, "Please, help!");
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorF, "Please, help!");
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis catches her as she reaches you and sways on her feet.");
         await Template.ƒS.Speech.tell(Template.characters.Lewis, "What's wrong?");
-        await Template.ƒS.Speech.tell(Template.characters.Survivor, "I think i got bitten by one of those-those-");
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorF, "I think i got bitten by one of those-those-");
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "Her wide fearful eyes settle on you.");
-        await Template.ƒS.Speech.tell(Template.characters.Survivor, "Please, I don't want to hurt anyone! I don't want to be one of them.. Please, k-kill me, before \
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorF, "Please, I don't want to hurt anyone! I don't want to be one of them.. Please, k-kill me, before \
         I turn! I beg you!");
         // Choice: Kill the infected woman or don't
         let killInfectedWoman = {
@@ -641,15 +913,15 @@ var Template;
                 await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(25, 100));
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Speech.tell(Template.characters.Player, "You can rest now.");
-                await Template.ƒS.Speech.tell(Template.characters.Survivor, "Thank you..");
+                await Template.ƒS.Speech.tell(Template.characters.SurvivorF, "Thank you..");
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "You take the shaking woman into your arms and pull out your knife out of her sight. \
                 Your body almost recognizes the motion as natural as you place it at the back of her neck at the base of her skull and with a sharp \
                 plunge you sever her spinal cord.");
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "Her body slumps against you and the shaking ceases. Gently you place her against the \
                 nearest wall and fully close her eyes. Then you pack away your knife.");
-                await Template.ƒS.Character.hide(Template.characters.Survivor);
+                await Template.ƒS.Character.hide(Template.characters.SurvivorF);
                 await Template.ƒS.update(0.2);
-                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(75, 100));
+                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.worried, Template.ƒS.positionPercent(75, 100));
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Speech.tell(Template.characters.Player, "...");
                 await Template.ƒS.Speech.tell(Template.characters.Lewis, "...");
@@ -666,7 +938,7 @@ var Template;
                 await Template.ƒS.Character.hide(Template.characters.Lewis);
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
-                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(55, 100));
+                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.worried, Template.ƒS.positionPercent(55, 100));
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Speech.tell(Template.characters.Lewis, "Come on, let's go.");
                 break;
@@ -676,50 +948,79 @@ var Template;
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(25, 100));
                 await Template.ƒS.update(0.2);
-                await Template.ƒS.Speech.tell(Template.characters.Player, "I can't...");
-                // Player can't kill her so she asks them to at least stay at her side until she dies or turns
-                // They stay with her and it seems that she died but then she attacks the player and hurts him
+                await Template.ƒS.Speech.tell(Template.characters.Player, "I can't... I'm sorry.");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "The woman slumps further into Lewis' arms, defeated.");
+                await Template.ƒS.Speech.tell(Template.characters.SurvivorF, "At least don't let me die or turn alone, please.");
+                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Of course we'll stay.");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis guides her towards the wall.");
+                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Here, sit down. That'll be more comfortable.");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "Time passes as Lewis starts talking about a children's story he used to love as a kid, \
+                but you're not really listening as you watch the life leaving the woman. When her head finally slumps forward unmoving, Lewis stops.");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "A few seconds pass and her body stays motionless and your gaze finds Lewis'. But that was a mistake.");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "In the short time you take your eyes off of her she lunges forward and manages to tear \
+                through your pants and draw blood.");
                 Template.dataForSave.damageScore += 10;
-                await Template.ƒS.Character.hide(Template.characters.Player);
-                await Template.ƒS.update(0.2);
-                await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt, Template.ƒS.positionPercent(25, 100));
-                await Template.ƒS.update(0.2);
-                await Template.ƒS.Speech.tell(Template.characters.Player, "Ugh!");
-                await Template.ƒS.Speech.tell(Template.characters.Narrator, "The zombie is pulled off of you and you only see Lewis ram a knife into her head and shortly\
-                after the body slumps to the ground. Lewis is at your side in a second, looking at your injury.");
-                await Template.ƒS.Character.hide(Template.characters.Survivor);
-                await Template.ƒS.update(0.2);
-                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(75, 100));
-                await Template.ƒS.update(0.2);
-                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Are you okay?!");
-                await Template.ƒS.Speech.tell(Template.characters.Player, "Yes, it's just a scratch...");
-                await Template.ƒS.Character.hide(Template.characters.Player);
-                await Template.ƒS.Character.hide(Template.characters.Lewis);
-                await Template.ƒS.update(0.2);
-                await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
-                await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(55, 100));
-                await Template.ƒS.update(0.2);
-                await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis helps to patch you up as good as he can and then takes your hands in his.");
-                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Don't beat yourself up over it, it was a difficult decision.");
-                await Template.ƒS.Speech.tell(Template.characters.Lewis, "I would have hesitated too, because there's a difference between killing on the \
-                battlefield, killing a zombie and killing someone innocent who got unlucky.");
-                await Template.ƒS.Speech.tell(Template.characters.Player, "...");
-                // maybe a memory from the war as the player got hurt and got saved by Lewis
-                // await ƒS.Character.hide(characters.Player);
-                // await ƒS.update(0.2);
-                // await ƒS.Character.show(characters.Player, characters.Player.pose.confused, ƒS.positionPercent(75, 100));
-                // await ƒS.update(0.2);
-                // await ƒS.Text.print("Another memory, but this one is from my time in the war. [...]");
-                await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis lets you be for a minute, but then he takes hold of your hand and gently pulls \
-                you along.");
-                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Come on, let's go.");
-                break;
+                if (Template.dataForSave.damageScore == 50) {
+                    await Template.ƒS.Character.hide(Template.characters.Lewis);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "You don't manage to stop her as she lunges at you for a second time and even Lewis \
+                    can't reach you in time.");
+                    await Template.ƒS.Character.hide(Template.characters.Player);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Lewis, "NO!");
+                    await Template.ƒS.Character.hide(Template.characters.Player);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "Her teeth sink into your neck and as she pulls back you can feel your skin rip. \
+                    Your screams soon turn into a choked gurgle as your mouth fills with blood. And your last thought before the whole world goes \
+                    dark is...");
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "<i>I don't want to die...</i>");
+                    return "badEnding";
+                }
+                else {
+                    await Template.ƒS.Character.hide(Template.characters.Player);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt, Template.ƒS.positionPercent(25, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "Ugh!");
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "The zombie is pulled off of you and you only see Lewis ram a knife into her head and shortly\
+                    after the body slumps to the ground. Lewis is at your side in a second, looking at your injury.");
+                    await Template.ƒS.Character.hide(Template.characters.SurvivorF);
+                    await Template.ƒS.Character.hide(Template.characters.Lewis);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.worried, Template.ƒS.positionPercent(55, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Lewis, "Are you okay?!");
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "Yes, it's just a scratch...");
+                    await Template.ƒS.Character.hide(Template.characters.Player);
+                    await Template.ƒS.Character.hide(Template.characters.Lewis);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis helps to patch you up as good as he can and then takes your hands in his.");
+                    await Template.ƒS.Speech.tell(Template.characters.Lewis, "Don't beat yourself up over it, it was a difficult decision.");
+                    await Template.ƒS.Speech.tell(Template.characters.Lewis, "I would have hesitated too, because there's a difference between killing on the \
+                    battlefield, killing a zombie and killing someone innocent who got unlucky.");
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "...");
+                    // maybe a memory from the war as the player got hurt and got saved by Lewis
+                    // await ƒS.Character.hide(characters.Player);
+                    // await ƒS.update(0.2);
+                    // await ƒS.Character.show(characters.Player, characters.Player.pose.confused, ƒS.positionPercent(75, 100));
+                    // await ƒS.update(0.2);
+                    // await ƒS.Text.print("Another memory, but this one is from my time in the war. [...]");
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "Lewis lets you be for a minute, but then he gently pulls you along.");
+                    await Template.ƒS.Speech.tell(Template.characters.Lewis, "Come on, let's go.");
+                    break;
+                }
         }
-        // They continue on, leave the side street and reach the edge of the city
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "After some more walking you two reach the edge of the city. The destruction here is less severe \
+        here. Some broken cars and corpses are strewn across the road, but in contrast to the city it seems almost peaceful. Just a bit more and \
+        your new life can begin. Soon you can rest.");
         await Template.ƒS.Character.hide(Template.characters.Player);
         await Template.ƒS.Character.hide(Template.characters.Lewis);
         await Template.ƒS.update(0.2);
-        return "goodEnding2";
+        return "goodEnding1";
     }
     Template.goThroughSideStreet = goThroughSideStreet;
 })(Template || (Template = {}));
@@ -738,30 +1039,68 @@ var Template;
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.neutral, Template.ƒS.positionPercent(75, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Player, "Show the way, Lewis.");
-        // insert Gespräch mit Lewis here (about the past and that he knows about a place they can go to)
-        await Template.ƒS.Speech.tell(Template.characters.Player, "Alright, which way do you want to take? We could go through a side street or the main street. \
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "This way.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "...");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "You called me 'Rush'. Was he someone you knew?"); // or "why?"
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.sad, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "So you really don't remember?");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.confused, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I woke up this morning in an apartment I didn't know and the only things I could remember were my \
+        name and that I was a soldier. I've been slowly remembering random little things, but most of my past is still blank.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.neutral, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "...");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "We served together in the military. I joined three years after you, when I was 19 and you were 23 \
+        at that time. That was 9 years ago, which makes you 32 years old now.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Tell me if you want me to stop.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You just nod as you try to process the new information.");
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "At first we didn't talk much, you liked to keep to yourself. You looked after everyone in your \
+        own ways and we respected that. But some of that changed after I got badly hurt in battle. I got shot in the shoulder and you risked your \
+        life to pull me back to safety. After that I never strayed far from your side.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Oh, that's right, you kept following me around like a lost puppy.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.happy, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Lewis, "Because you finally started opening up after that! And I realized how nice it was to be at your side.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Alright, which way do you want to take? We could go through a side street or through the school. \
         Both will take us to the edge of the city. It's your call.");
         // Choice: Which way to go
-        let whichStreet = {
+        let whichWayWithLewis = {
             takeSideStreet: "Side street",
-            takeMainStreet: "Main street",
+            goThroughSchool: "School",
         };
-        let choiceWhichStreet = await Template.ƒS.Menu.getInput(whichStreet, "choiceCSSClass");
-        switch (choiceWhichStreet) {
-            case whichStreet.takeSideStreet:
+        let choicewhichWayWithLewis = await Template.ƒS.Menu.getInput(whichWayWithLewis, "choiceCSSClass");
+        switch (choicewhichWayWithLewis) {
+            case whichWayWithLewis.takeSideStreet:
                 console.log("Take the side street.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "Let's take the side street.");
+                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Alrighty!");
+                await Template.ƒS.Character.hide(Template.characters.Lewis);
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.update(0.2);
                 return "goThroughSideStreet";
                 break;
-            case whichStreet.takeMainStreet:
-                console.log("Take the main street.");
-                await Template.ƒS.Speech.tell(Template.characters.Player, "Let's go through the main street.");
+            case whichWayWithLewis.goThroughSchool:
+                console.log("Go through schoolyard.");
+                await Template.ƒS.Speech.tell(Template.characters.Player, "Let's go through the school.");
+                await Template.ƒS.Speech.tell(Template.characters.Lewis, "Alrighty!");
+                await Template.ƒS.Character.hide(Template.characters.Lewis);
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.update(0.2);
-                return "goThroughMainStreet";
+                return "goThroughSchoolyard";
                 break;
         }
     }
@@ -779,6 +1118,12 @@ var Template;
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy2, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Player, "It's peaceful here and not many zombies find their way all the way out here.");
+        // some more text and code
+        // One last journal entry
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "GOOD ENDING 1!");
+        await Template.ƒS.update(0.2);
         return "emptyScene";
     }
     Template.goodEnding1 = goodEnding1;
@@ -787,14 +1132,23 @@ var Template;
 (function (Template) {
     async function goodEnding2() {
         console.log("Scene: Good Ending 2");
+        Template.dataForSave.pickedMeterScene = true;
+        document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = true);
+        document.getElementById("scoreForDamage").style.display = "none";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.cabinInForest);
+        await Template.ƒS.Location.show(Template.locations.beach);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "Several weeks later");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral2, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Player, "It's peaceful here and I haven't seen a single zombie in weeks.");
+        // some more text and code
+        // Another journal entry, maybe two or three
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "GOOD ENDING 2!");
+        await Template.ƒS.update(0.2);
         return "emptyScene";
     }
     Template.goodEnding2 = goodEnding2;
@@ -810,22 +1164,44 @@ var Template;
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.oldStreet);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[Somewhere outside]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Player, "Oh, let's help the survivors");
-        await Template.ƒS.update(0.5);
-        if (Template.dataForSave.pickedUpRations == false) {
-            // Player has to kill them with the knife and gets hurt in the process
+        if (Template.dataForSave.pickedUpBat == false) {
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "You pull out your knife and quietly sneak towards the closest zombie. You manage to take \
+            this one and the next two down without a hitch, but as you sneak up on the last it turns around and charges towards you.");
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "With the knife you don't have enough reach to take it down before it's close enough to barrel \
+            into you with such a force that you fall to the ground. And despite the hoodie you can feel your elbow scrape across the ground, drawing blood.");
             await Template.ƒS.Character.hide(Template.characters.Player);
             await Template.ƒS.update(0.2);
             await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
             await Template.ƒS.update(0.2);
             await Template.ƒS.Speech.tell(Template.characters.Player, "Shit.");
             Template.dataForSave.damageScore += 10;
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "But you manage to ram your knife into its head before it can take a bite out of you.");
         }
-        // Player manages to kill the zombies with the help of the group and they thank him
-        // They then ask him if he has any food or water for them, because they have children with them and haven't eaten in days
+        else if (Template.dataForSave.pickedUpBat == true) {
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "You pull out your knife and quietly sneak towards the closest zombie. You manage to take \
+            this one and the next two down without a hitch, but instead of risking to sneak towards the last one, you take out your golf club and smash \
+            its head in.");
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "You wait a few more seconds to see if more zombies will appear, but when none come you nod to \
+            the group and they carefully open the doors.");
+        }
+        await Template.ƒS.Character.show(Template.characters.SurvivorM, Template.characters.SurvivorM.pose.survivorM, Template.ƒS.positionPercent(65, 100));
+        await Template.ƒS.Character.show(Template.characters.SurvivorChild, Template.characters.SurvivorChild.pose.survivorChild, Template.ƒS.positionPercent(75, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "Oh, thank you, without you we would have been- Thank you.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Are you all okay?");
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "Yes, thanks to you. We've been stuck in that shop for hours now. I don't think the doors \
+        would have held on for much longer.");
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "You've already done so much for us, but I just must ask. Do you maybe have something to eat and \
+        drink for us?");
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "There are some children in our group and they're getting weaker without anything to eat.");
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "Our group mostly consists of women, old people or children and the men still haven't come back \
+        from their supply run. Just a little bit would be sufficient to give us enough time until they are back.");
         if (Template.dataForSave.pickedUpRations == true) {
             // Choice: Give rations or not
             let giveThemRations = {
@@ -838,6 +1214,35 @@ var Template;
                     console.log("Give your rations to the group.");
                     await Template.ƒS.Speech.tell(Template.characters.Player, "Here, you can have my rations.");
                     Template.dataForSave.pickedUpRations = false;
+                    await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "Thank you so much! I don't know how we could ever repay your kindness.");
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "You notice a little girl peak at you from behind the man's legs.");
+                    await Template.ƒS.Character.hide(Template.characters.Player);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(30, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "You give her a small smile and she ducks out of sight for a moment, but you can hear her giggle. \
+                    A moment later she steps out with her hands behind her back and walks towards you.");
+                    await Template.ƒS.Character.hide(Template.characters.SurvivorChild);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.SurvivorChild, Template.characters.SurvivorChild.pose.survivorChild, Template.ƒS.positionPercent(50, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.SurvivorChild, "This is for you, Mister.");
+                    // she hands the player a flower
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you, I will take good care of it.");
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "She giggles again and runs back behind the man's legs.");
+                    await Template.ƒS.Character.hide(Template.characters.SurvivorChild);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.SurvivorChild, Template.characters.SurvivorChild.pose.survivorChild, Template.ƒS.positionPercent(75, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "You don't have to repay me. Just make sure you keep everyone safe.");
+                    await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "I will! Thanks to you we now have a chance.");
+                    await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "I hope we'll meet again someday. Goodbye and stay safe.");
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you. And you stay safe as well.");
+                    await Template.ƒS.Character.hide(Template.characters.SurvivorM);
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
+                    // write journal entry
+                    await Template.ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
+                        for some days, or about the time he saved a hostage.]");
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     return "callForHelp";
@@ -845,6 +1250,18 @@ var Template;
                 case giveThemRations.dontGiveRationsLie:
                     console.log("Lie and don't give your rations to the group.");
                     await Template.ƒS.Speech.tell(Template.characters.Player, "Sorry, I have nothing left");
+                    await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "I see... But we'd like to thank you again for your help. I hope we'll meet again. \
+                    Goodbye and stay safe.");
+                    await Template.ƒS.Character.hide(Template.characters.Player);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(30, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you. And you stay safe as well.");
+                    await Template.ƒS.Character.hide(Template.characters.SurvivorM);
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
+                    // write journal entry
+                    await Template.ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
+                        for some days, or about the time he saved a hostage.]");
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     return "callForHelp";
@@ -859,7 +1276,19 @@ var Template;
             switch (choiceGiveThemRations) {
                 case giveThemRations.dontGiveRationsTruth:
                     console.log("Don't give your rations to the group.");
-                    await Template.ƒS.Speech.tell(Template.characters.Player, "Sorry, I have nothing left");
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "Sorry, I have nothing left.");
+                    await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "I see... But we'd like to thank you again for your help. I hope we'll meet again. \
+                    Goodbye and stay safe.");
+                    await Template.ƒS.Character.hide(Template.characters.Player);
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(30, 100));
+                    await Template.ƒS.update(0.2);
+                    await Template.ƒS.Speech.tell(Template.characters.Player, "Thank you. And you stay safe as well.");
+                    await Template.ƒS.Character.hide(Template.characters.SurvivorM);
+                    await Template.ƒS.Speech.tell(Template.characters.Narrator, "The Man and the little girl wave until you round round the corner and can't see them anymore.");
+                    // write journal entry
+                    await Template.ƒS.Text.print("[Writes about the encounter and about a memory. Either a time where he had to survive without food \
+                        for some days, or about the time he saved a hostage.]");
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     return "callForHelp";
@@ -878,26 +1307,55 @@ var Template;
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.otherStreet);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[Somewhere outside]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Player, "I'll ignore the call for help.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I'm sorry whoever you are, but I can't risk my only chance.");
         if (Template.dataForSave.pickedUpRations == false) {
-            // Player gets dizzy and stumbles, scratches his arm on some protruding metal
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "You keep walking for some minutes, when suddenly your head feels like you're underwater \
+            and your sight gets blurry for a moment. You stumble and are just barely able to catch yourself on a wall but while doing so your hand \
+            manages to scratch against a stray protruding nail there.");
             await Template.ƒS.Character.hide(Template.characters.Player);
             await Template.ƒS.update(0.2);
             await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
             await Template.ƒS.update(0.2);
-            await Template.ƒS.Speech.tell(Template.characters.Player, "Ah, fuck.");
             Template.dataForSave.damageScore += 5;
+            await Template.ƒS.Speech.tell(Template.characters.Player, "Ah, fuck.");
+            await Template.ƒS.Speech.tell(Template.characters.Player, "I didn't notice how dehydrated I was.");
+            await Template.ƒS.Character.hide(Template.characters.Player);
+            await Template.ƒS.update(0.2);
+            await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
+            await Template.ƒS.update(0.2);
+            await Template.ƒS.Speech.tell(Template.characters.Player, "I should bandage the wound. Don't want it to get infected.");
         }
+        else {
+            await Template.ƒS.Speech.tell(Template.characters.Narrator, "You keep walking for a while and come across a few zombies. You alternate between taking them \
+            down stealthily or just sneaking by undetected.");
+        }
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Huh?");
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.zombie, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "This zombie is different from the others, you just know it. But it takes you a moment to pinpoint \
+        exactly why, as a memory hits you like a bucket of cold water.");
+        await Template.ƒS.Character.hide(Template.characters.Lewis);
         await Template.ƒS.Character.hide(Template.characters.Player);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.memory, Template.ƒS.positionPercent(50, 100));
         await Template.ƒS.update(0.2);
-        // Sees Lewis as a zombie and remembers him from his time in the military
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "The face of the zombie- the man, bloody, almost as much as in the present. You drag him behind a \
+        wall with one hand, your gun forgotten in the other. He got shot in the shoulder and you're trying to stop the bleeding.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You remember his name, <i>Lewis</i>, and telling him to stay awake. You remember him clinging \
+        to your arm like you were his lifeline.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "For a short moment you wonder if he survived, but you <i>know</i> that he did, because after that \
+        he decided to stick by your side. The man who got your back, your best friend, your...");
+        await Template.ƒS.Character.hide(Template.characters.Others);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.zombie, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "No...");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You should have followed your gut. But you didn't and now Lewis is gone.");
         // Choice: Kill the Zombie or leave it
         let killLewis = {
             killHim: "Give him mercy.",
@@ -917,30 +1375,64 @@ var Template;
                 switch (choicewhichWeapon) {
                     case whichWeapon.withKnife:
                         console.log("Kill him with the knife.");
-                        await Template.ƒS.Speech.tell(Template.characters.Player, "I'm sorry...");
-                        // Player tries to kill Zombie-Lewis with the knife but they have to get up close to do it
-                        // Either he is sloppy because it takes more time and gets hurt or he remembers something when he is close enough to really see Lewis' face
+                        await Template.ƒS.Speech.tell(Template.characters.Player, "I am so sorry...");
+                        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You take out your knife and get close to Lewis. But you're scared you won't make \
+                        it to the rendezvous in time so you make a mistake and accidentally kick an empty bottle that was lying just behind the zombie.");
                         Template.dataForSave.damageScore += 5;
+                        if (Template.dataForSave.damageScore == 50) {
+                            await Template.ƒS.Speech.tell(Template.characters.Narrator, "Zombie-Lewis turns around and before you can react he goes for your neck.");
+                            await Template.ƒS.Character.hide(Template.characters.Player);
+                            await Template.ƒS.update(0.2);
+                            await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                            await Template.ƒS.update(0.2);
+                            await Template.ƒS.Speech.tell(Template.characters.Player, "AHHH!");
+                            await Template.ƒS.Character.hide(Template.characters.Player);
+                            await Template.ƒS.update(0.2);
+                            await Template.ƒS.Speech.tell(Template.characters.Narrator, "His teeth sink into your neck and as he pulls back you can feel your skin rip. \
+                            Your screams soon turn into a choked gurgle as your mouth fills with blood. And your last thought before the whole world goes\
+                            dark is...");
+                            await Template.ƒS.Speech.tell(Template.characters.Player, "<i>I was so close...</i>");
+                            return "badEnding";
+                        }
+                        else {
+                            await Template.ƒS.Speech.tell(Template.characters.Narrator, "Zombie-Lewis turns around and manages to scratch open your arm, before you finally plunge the \
+                            knife deep into his head. His body slumps to the ground");
+                            await Template.ƒS.Character.hide(Template.characters.Player);
+                            await Template.ƒS.update(0.2);
+                            await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                            await Template.ƒS.update(0.2);
+                            await Template.ƒS.Speech.tell(Template.characters.Player, "Shit.");
+                        }
                         await Template.ƒS.Character.hide(Template.characters.Player);
                         await Template.ƒS.update(0.2);
-                        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(30, 100));
                         await Template.ƒS.update(0.2);
-                        await Template.ƒS.Speech.tell(Template.characters.Player, "Shit.");
-                        // Manages to kill Zombie-Lewis
-                        await Template.ƒS.Character.hide(Template.characters.Player);
-                        await Template.ƒS.update(0.2);
-                        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
-                        await Template.ƒS.update(0.2);
+                        await Template.ƒS.Speech.tell(Template.characters.Player, "...");
+                        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You simply stare at him for a moment, before you remember that you should to leave. \
+                        With one last look at Lewis you continue on towards the rendezvous.");
+                        await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await Template.ƒS.Speech.tell(Template.characters.Player, "He deserves to be remembered.");
                         await Template.ƒS.Text.print("Memory about Lewis + extra memory");
+                        // add journal entry
                         Template.dataForSave.novelMilitaryTimeExtra = true;
                         break;
                     case whichWeapon.withGun:
                         console.log("Kill him with the gun.");
-                        await Template.ƒS.Speech.tell(Template.characters.Player, "I'm sorry...");
-                        // Player shoots Zombie-Lewis in the head and leaves before other zombies can arrive
+                        await Template.ƒS.Character.hide(Template.characters.Player);
+                        await Template.ƒS.update(0.2);
+                        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(30, 100));
+                        await Template.ƒS.update(0.2);
+                        await Template.ƒS.Speech.tell(Template.characters.Player, "I am so sorry...");
+                        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You take out your gun and train it towards his head with slightly shaking hands. \
+                        You hesitate and suddenly his gaze turns to you and for split seconds it almost seems like he recognizes you. But then he \
+                        charges towards you with a snarl and you pull the trigger just before he can come too close.");
+                        await Template.ƒS.Speech.tell(Template.characters.Narrator, "His lifeless body hits the ground and you simply stare at him for a moment, before \
+                        you remember that you have to leave, because every zombie in the vicinity will be lured here by the gunshot. With one last look \
+                        at Lewis you run into the direction of the rendezvous");
+                        await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
                         await Template.ƒS.Speech.tell(Template.characters.Player, "He deserves to be remembered.");
                         await Template.ƒS.Text.print("Memory about Lewis");
+                        // add journal entry
                         Template.dataForSave.novelMilitaryTime = true;
                         break;
                 }
@@ -951,8 +1443,12 @@ var Template;
             case killLewis.dontKillHim:
                 console.log("Don't kill Zombie-Lewis.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "I can't kill him...");
-                await Template.ƒS.Speech.tell(Template.characters.Player, "But he deserves that I at least remember him.");
+                await Template.ƒS.Speech.tell(Template.characters.Player, "Please forgive me...");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "With one last look at Lewis you run into the direction of the rendezvous");
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you're sure that you're far enough away you pull out your journal.");
+                await Template.ƒS.Speech.tell(Template.characters.Player, "He at least deserves that I remember him.");
                 await Template.ƒS.Text.print("Memory about Lewis");
+                // add journal entry
                 Template.dataForSave.novelMilitaryTime = true;
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.update(0.2);
@@ -983,12 +1479,13 @@ var Template;
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.thinking, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Player, "What are all the zombies doing there?");
-        // Add more code here: Player sees the group of survivors that are defending themselves against a group of zombies
-        // The survivors are inside an old abandoned shop and the zombies are trying to break inside to get to them
-        // One of them sees the player and calls to them for help
-        await Template.ƒS.Character.show(Template.characters.Survivor, Template.characters.Survivor.pose.survivorM, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "While you're carefully watching the zombies, you notice movement in one of the shop windows.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You notice a group of people inside the shop holding closed the doors, as the zombies try to \
+        claw and shove their way inside.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "One of the people in the shop, an older man, meets your gaze and starts waving frantically.");
+        await Template.ƒS.Character.show(Template.characters.SurvivorM, Template.characters.SurvivorM.pose.survivorM, Template.ƒS.positionPercent(70, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Survivor, "Please, you have to help us! I beg you! There are children in here!");
+        await Template.ƒS.Speech.tell(Template.characters.SurvivorM, "Please, you have to help us! I beg you! There are children in here!");
         // Choice: Help the group of survivors or don't
         let groupNeedsHelp = {
             helpGroup: "Help them.",
@@ -1000,14 +1497,15 @@ var Template;
                 console.log("Help the group.");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "I have to help them.");
                 await Template.ƒS.Character.hide(Template.characters.Player);
+                await Template.ƒS.Character.hide(Template.characters.SurvivorM);
                 await Template.ƒS.update(0.2);
                 return "helpingTheSurvivors";
                 break;
             case groupNeedsHelp.ignoreGroup:
                 console.log("Ignore the group");
                 await Template.ƒS.Speech.tell(Template.characters.Player, "I don't have time for this.");
-                await Template.ƒS.Character.hide(Template.characters.Survivor);
-                await Template.ƒS.Speech.tell(Template.characters.Narrator, "You turn away from the group and their calls for help and continue on. Just as you \
+                await Template.ƒS.Character.hide(Template.characters.SurvivorM);
+                await Template.ƒS.Speech.tell(Template.characters.Narrator, "You turn away from the group and their calls for help continue on. Just as you \
                 make to round the next corner you hear glass break and the calls turn into screams of terror and pain. Amidst the agonizing \
                 screams you can hear the voice of the man that had called out to you curse you and cry out why you didn't help.");
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "You don't turn back around to see the zombies storming into the shop like starving \
@@ -1056,7 +1554,7 @@ var Template;
         await Template.ƒS.Speech.tell(Template.characters.Player, "Wait, I know. My name is ");
         Template.dataForSave.nameProtagonist = await Template.ƒS.Speech.getInput();
         Template.characters.Player.name = Template.dataForSave.nameProtagonist;
-        await Template.ƒS.Speech.tell(Template.characters.Player, "I should write everything I know down.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I should write everything I know down. I don't want to forget again.");
         await Template.ƒS.Text.print("I suddenly woke up in the apocalypse and I have trouble remembering how it all started or who I really am. \
         I faintly remember being in the military, but not for how long or if I left it before everything went to hell. <br><br><br><br> \
         Name: " + Template.dataForSave.nameProtagonist + "<br><br> Age: ?? <br><br> Occupation: Soldier?/Ex-Soldier? ");
@@ -1095,12 +1593,42 @@ var Template;
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.base);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "[At Military Camp Delta]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
-        await Template.ƒS.Speech.tell(Template.characters.Player, "I made it to rendezvous.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "I made it to rendezvous in time.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You get in line behind all the other survivors that are all being checked before being led inside \
+        one of the two planes still there. When you reach the front you're greeted by a woman who greets you with a tired smile.");
+        await Template.ƒS.Character.show(Template.characters.Soldier, Template.characters.Soldier.pose.soldier, Template.ƒS.positionPercent(70, 100));
+        await Template.ƒS.Speech.tell(Template.characters.Soldier, "Are you armed?");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "You nod and reluctantly place all your weapons in her outstretched hand.");
+        await Template.ƒS.Speech.tell(Template.characters.Soldier, "Thank you and don't worry, you won't need them anymore.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "After that you're sent into a medical tent where you are checked for bites and your injuries \
+        are treated as best as possible. You were the last survivor to arrive, so they start packing up as you put your hoodie back on.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you leave the tent the soldier that greeted you is waiting for you.");
+        await Template.ƒS.Speech.tell(Template.characters.Soldier, "It's nice to have another soldier with us.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.surprised, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "How did you know?");
+        await Template.ƒS.Speech.tell(Template.characters.Soldier, "I've been around long enough to notice the small things.");
+        await Template.ƒS.Speech.tell(Template.characters.Soldier, "And your hoodie gave me the confirmation.");
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Oh.");
+        await Template.ƒS.Speech.tell(Template.characters.Soldier, "We won't have to fight anymore, where we're going. It will all be in the past. I can't wait to \
+        forget all about that and start a new life.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.sad, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.5);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Yes, the past...");
+        await Template.ƒS.Speech.tell(Template.characters.Soldier, "Come on, let's go. Before they decide to fly without us.");
+        await Template.ƒS.Speech.tell(Template.characters.Narrator, "Together you board the plane that will take you to your new life. A new start.");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.Character.hide(Template.characters.Soldier);
+        await Template.ƒS.update(0.2);
         return "goodEnding2";
     }
     Template.rendezvous = rendezvous;
@@ -1211,6 +1739,7 @@ var Template;
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Player, "A golf club. Could be useful if I want to keep the zombies away from me. Is there anything else?");
+        Template.dataForSave.pickedUpBat = true;
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "You notice some photos on one of the cabinets.");
         await Template.ƒS.Speech.tell(Template.characters.Player, "I wonder who lived here before.");
         await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.catPic, Template.ƒS.positionPercent(70, 70));

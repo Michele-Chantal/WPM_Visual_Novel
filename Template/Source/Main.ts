@@ -22,6 +22,7 @@ namespace Template {
     novelEnding2: false,
     // Item
     pickedUpRations: false,
+    pickedUpBat: false,
 
     pickedMeterScene: false,
     pickedAnimationScene: false,
@@ -83,9 +84,17 @@ namespace Template {
       name: "Old Street",
       background: "Images/Backgrounds/old_street.png"
     },
+    schoolyard: {
+      name: "Schoolyard",
+      background: "Images/Backgrounds/schoolyard.png"
+    },
     school: {
       name: "School",
       background: "Images/Backgrounds/school.png"
+    },
+    cafeteria: {
+      name: "cafeteria",
+      background: "Images/Backgrounds/cafeteria.png"
     },
     sideStreet: {
       name: "Side Street",
@@ -95,10 +104,26 @@ namespace Template {
       name: "Living Room",
       background: "Images/Backgrounds/living_room.png"
     },
+    otherStreet: {
+      name: "Other Street",
+      background: "Images/Backgrounds/other_street.png"
+    },
     cabinInForest: {
       name: "Cabin in the forest",
       background: "Images/Backgrounds/cabin_in_forest.jpg"
-    }
+    },
+    dark: {
+      name: "Bad Ending 1",
+      background: "Images/Backgrounds/dark.png"
+    },
+    base: {
+      name: "Base",
+      background: "Images/Backgrounds/base.png"
+    },
+    beach: {
+      name: "Beach",
+      background: "Images/Backgrounds/beach.png"
+    },
   };
 
   // Die Charaktere
@@ -135,38 +160,65 @@ namespace Template {
         sad: "Images/Characters/lewis_sad.png",
         sad2: "Images/Characters/lewis_sad2.png",
         angry: "Images/Characters/lewis_angry.png",
-        surprised: "Images/Characters/lewis_surprised.png"
+        surprised: "Images/Characters/lewis_surprised.png",
+        worried: "Images/Characters/lewis_worried.png",
+        zombie: "Images/Characters/lewis_zombie.png"
       }
     },
     Radio: {
       name: "Radio",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
+        radio: "Images/Items/radio.png",
       }
     },
-    Survivor: {
-      name: "Survivor",
+    SurvivorM: {
+      name: "Man",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         survivorM: "Images/Characters/survivorM.png",
+      }
+    },
+    SurvivorF: {
+      name: "Woman",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
         survivorF: "Images/Characters/survivorF.png",
+      }
+    },
+    SurvivorChild: {
+      name: "Child",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        survivorChild: "Images/Characters/survivorChild.png"
       }
     },
     Zombie: {
       name: "Zombie",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
-        zombieM: "Images/Characters/zombie.png",
-        zombieF: "Images/Characters/zombie.png",
-        child: "Images/Characters/zombie.png"
+        zombieM: "Images/Characters/zombieM.png",
+        zombieF: "Images/Characters/zombieF.png",
+        zombieChild: "Images/Characters/zombieChild.png"
+      }
+    },
+    Soldier: {
+      name: "Soldier",
+      origin: ƒS.ORIGIN.BOTTOMCENTER,
+      pose: {
+        soldier: "Images/Characters/soldier.png"
       }
     },
     Others: {
       name: "Others",
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
-        radio: "Images/Items/radio.png",
-        catPic: "Images/Items/cat_pic.png"
+        catPic: "Images/Items/cat_pic.png",
+        golfClub: "Images/Items/golf_club.png",
+        memory: "Images/Items/memory.png",
+        // flower: "Images/Items/flower.png",       still unsure about this one
+        // rations: "Images/Items/rations.png",      still unsure about this one
+        // journal: "Images/Items/journal.png",      still unsure about this one
       }
     }
   }
@@ -270,14 +322,14 @@ namespace Template {
       // { id: "callForHelp", scene: callForHelp, name: "Call for help"},
       // { id: "followCallForHelp", scene: followCallForHelp, name: "Follow the call for help"},
       // { id: "ignoreCallForHelp", scene: ignoreCallForHelp, name: "Ignore the call for help"},
-      // { id: "rendezvous", scene: rendezvous, name: "Rendezvous"},
+      { id: "rendezvous", scene: rendezvous, name: "Rendezvous"},
       // { id: "goWithLewis", scene: goWithLewis, name: "Go with Lewis"},
-      // { id: "goThroughMainStreet", scene: goThroughMainStreet, name: "Go through main street"},
       { id: "goThroughSideStreet", scene: goThroughSideStreet, name: "Go through side street"},
+      { id: "goThroughSchoolyard", scene: goThroughSchoolyard, name: "Go through schoolyard"},
 
       { id: "goodEnding1", scene: goodEnding1, name: "Good Ending 1"},
       { id: "goodEnding2", scene: goodEnding2, name: "Good Ending 2"},
-      
+      { id: "badEnding1", scene: badEnding1, name: "Bad Ending 1"},
 
       { id: "emptyScene", scene: empty, name: "END" }
     ];

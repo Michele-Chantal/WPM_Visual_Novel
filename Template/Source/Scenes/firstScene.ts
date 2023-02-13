@@ -17,7 +17,7 @@ namespace Template {
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "A sound from your right draws your attention just as you leave the apartment.");
         await ƒS.Speech.tell(characters.Player, "Hello?")
-        await ƒS.Character.show(characters.Zombie, characters.Zombie.pose.zombie, ƒS.positionPercent(70, 100));
+        await ƒS.Character.show(characters.Zombie, characters.Zombie.pose.zombieM, ƒS.positionPercent(70, 100));
         // await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Zombie, "Uaaaaaghhrrrr");
         // await ƒS.update(0.2);

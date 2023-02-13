@@ -39,7 +39,7 @@ namespace Template {
         await ƒS.Speech.tell(characters.Player, "Wait, I know. My name is ");
         dataForSave.nameProtagonist = await ƒS.Speech.getInput();
         characters.Player.name = dataForSave.nameProtagonist;
-        await ƒS.Speech.tell(characters.Player, "I should write everything I know down.");
+        await ƒS.Speech.tell(characters.Player, "I should write everything I know down. I don't want to forget again.");
         await ƒS.Text.print("I suddenly woke up in the apocalypse and I have trouble remembering how it all started or who I really am. \
         I faintly remember being in the military, but not for how long or if I left it before everything went to hell. <br><br><br><br> \
         Name: " + dataForSave.nameProtagonist + "<br><br> Age: ?? <br><br> Occupation: Soldier?/Ex-Soldier? ");

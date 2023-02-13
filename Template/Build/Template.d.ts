@@ -19,6 +19,7 @@ declare namespace Template {
         novelEnding1: boolean;
         novelEnding2: boolean;
         pickedUpRations: boolean;
+        pickedUpBat: boolean;
         pickedMeterScene: boolean;
         pickedAnimationScene: boolean;
         pickedChoice: boolean;
@@ -62,7 +63,15 @@ declare namespace Template {
             name: string;
             background: string;
         };
+        schoolyard: {
+            name: string;
+            background: string;
+        };
         school: {
+            name: string;
+            background: string;
+        };
+        cafeteria: {
             name: string;
             background: string;
         };
@@ -74,7 +83,23 @@ declare namespace Template {
             name: string;
             background: string;
         };
+        otherStreet: {
+            name: string;
+            background: string;
+        };
         cabinInForest: {
+            name: string;
+            background: string;
+        };
+        dark: {
+            name: string;
+            background: string;
+        };
+        base: {
+            name: string;
+            background: string;
+        };
+        beach: {
             name: string;
             background: string;
         };
@@ -113,19 +138,36 @@ declare namespace Template {
                 sad2: string;
                 angry: string;
                 surprised: string;
+                worried: string;
+                zombie: string;
             };
         };
         Radio: {
             name: string;
             origin: ƒ.ORIGIN2D;
-            pose: {};
+            pose: {
+                radio: string;
+            };
         };
-        Survivor: {
+        SurvivorM: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
                 survivorM: string;
+            };
+        };
+        SurvivorF: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
                 survivorF: string;
+            };
+        };
+        SurvivorChild: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                survivorChild: string;
             };
         };
         Zombie: {
@@ -134,15 +176,23 @@ declare namespace Template {
             pose: {
                 zombieM: string;
                 zombieF: string;
-                child: string;
+                zombieChild: string;
+            };
+        };
+        Soldier: {
+            name: string;
+            origin: ƒ.ORIGIN2D;
+            pose: {
+                soldier: string;
             };
         };
         Others: {
             name: string;
             origin: ƒ.ORIGIN2D;
             pose: {
-                radio: string;
                 catPic: string;
+                golfClub: string;
+                memory: string;
             };
         };
     };
@@ -151,6 +201,9 @@ declare namespace Template {
 }
 declare namespace Template {
     function Scene(): ƒS.SceneReturn;
+}
+declare namespace Template {
+    function badEnding1(): ƒS.SceneReturn;
 }
 declare namespace Template {
     function callForHelp(): ƒS.SceneReturn;
@@ -165,7 +218,7 @@ declare namespace Template {
     function followCallForHelp(): ƒS.SceneReturn;
 }
 declare namespace Template {
-    function goThroughMainStreet(): ƒS.SceneReturn;
+    function goThroughSchoolyard(): ƒS.SceneReturn;
 }
 declare namespace Template {
     function goThroughSideStreet(): ƒS.SceneReturn;

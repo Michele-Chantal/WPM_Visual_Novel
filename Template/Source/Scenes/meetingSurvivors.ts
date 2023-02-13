@@ -22,12 +22,13 @@ namespace Template {
         await ƒS.Character.show(characters.Player, characters.Player.pose.thinking, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Player, "What are all the zombies doing there?");
-        // Add more code here: Player sees the group of survivors that are defending themselves against a group of zombies
-        // The survivors are inside an old abandoned shop and the zombies are trying to break inside to get to them
-        // One of them sees the player and calls to them for help
-        await ƒS.Character.show(characters.Survivor, characters.Survivor.pose.survivorM, ƒS.positionPercent(70, 100));
+        await ƒS.Speech.tell(characters.Narrator, "While you're carefully watching the zombies, you notice movement in one of the shop windows.");
+        await ƒS.Speech.tell(characters.Narrator, "You notice a group of people inside the shop holding closed the doors, as the zombies try to \
+        claw and shove their way inside.");
+        await ƒS.Speech.tell(characters.Narrator, "One of the people in the shop, an older man, meets your gaze and starts waving frantically.");
+        await ƒS.Character.show(characters.SurvivorM, characters.SurvivorM.pose.survivorM, ƒS.positionPercent(70, 100));
         await ƒS.update(0.5);
-        await ƒS.Speech.tell(characters.Survivor, "Please, you have to help us! I beg you! There are children in here!")
+        await ƒS.Speech.tell(characters.SurvivorM, "Please, you have to help us! I beg you! There are children in here!")
 
         // Choice: Help the group of survivors or don't
         let groupNeedsHelp = {
@@ -42,6 +43,7 @@ namespace Template {
                 console.log("Help the group.");
                 await ƒS.Speech.tell(characters.Player, "I have to help them.");
                 await ƒS.Character.hide(characters.Player);
+                await ƒS.Character.hide(characters.SurvivorM);
                 await ƒS.update(0.2);
                 return "helpingTheSurvivors";
                 break;
@@ -49,8 +51,8 @@ namespace Template {
             case groupNeedsHelp.ignoreGroup:
                 console.log("Ignore the group");
                 await ƒS.Speech.tell(characters.Player, "I don't have time for this.");
-                await ƒS.Character.hide(characters.Survivor);
-                await ƒS.Speech.tell(characters.Narrator, "You turn away from the group and their calls for help and continue on. Just as you \
+                await ƒS.Character.hide(characters.SurvivorM);
+                await ƒS.Speech.tell(characters.Narrator, "You turn away from the group and their calls for help continue on. Just as you \
                 make to round the next corner you hear glass break and the calls turn into screams of terror and pain. Amidst the agonizing \
                 screams you can hear the voice of the man that had called out to you curse you and cry out why you didn't help.");
                 await ƒS.Speech.tell(characters.Narrator,"You don't turn back around to see the zombies storming into the shop like starving \

@@ -36,6 +36,7 @@ namespace Template {
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Player, "A golf club. Could be useful if I want to keep the zombies away from me. Is there anything else?");
+        dataForSave.pickedUpBat = true;
         await ƒS.Speech.tell(characters.Narrator, "You notice some photos on one of the cabinets.");
         await ƒS.Speech.tell(characters.Player, "I wonder who lived here before.");
         await ƒS.Character.show(characters.Others, characters.Others.pose.catPic, ƒS.positionPercent(70, 70))
