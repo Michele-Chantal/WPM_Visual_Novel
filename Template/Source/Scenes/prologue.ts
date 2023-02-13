@@ -7,7 +7,7 @@ namespace Template {
         document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
         document.getElementById("scoreForDamage").style.display = "";
 
-        ƒS.Speech.setTickerDelays(80, 5000); // kontrolliert die Textgeschwindigkeit -> cpms = characters per miliisecond
+        ƒS.Speech.setTickerDelays(40, 5000); // kontrolliert die Textgeschwindigkeit -> cpms = characters per miliisecond
         // let signalDelay3: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(3)]);
 
         ƒS.Speech.hide(); //hides the speech --> verhindert, dass man die speechbox sofort mit Beginn der Szene sieht
@@ -32,6 +32,7 @@ namespace Template {
         and I'm starting to lose hope. Is this going to be the end of humanity?"); 
         await ƒS.Text.print("Day 26, <br><br> I lost all contact to the military headquarters. Were they overrun or is something interferring \
         with the radios? I really hope it's the latter... I don't know how good our chances are if we lost the military.");
+        await ƒS.Text.print("Day 45, <br><br> I don't know if I can keep doing this...");
         
         await ƒS.update();
         await ƒS.Character.hide(characters.Player);

@@ -7,6 +7,7 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.dark);
+        await ƒS.update(transition.vignette.duration, transition.vignette.alpha, transition.vignette.edge);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "GAME OVER!");
         await ƒS.update(0.2);

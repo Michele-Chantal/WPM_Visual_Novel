@@ -11,8 +11,9 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.sideStreet);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Narrator, "[In a side street]");
+        // await ƒS.Speech.tell(characters.Narrator, "[In a side street]");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(25, 100));
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.neutral, ƒS.positionPercent(75, 100));
         await ƒS.update(0.5);
@@ -134,15 +135,17 @@ namespace Template {
                 await ƒS.Speech.tell(characters.Narrator, "A few seconds pass and her body stays motionless and your gaze finds Lewis'. But that was a mistake.");
                 await ƒS.Speech.tell(characters.Narrator, "In the short time you take your eyes off of her she lunges forward and manages to tear \
                 through your pants and draw blood.");
-                dataForSave.damageScore += 10;
                 if (dataForSave.damageScore == 50) {
+                    dataForSave.damageScore += 10;
                     await ƒS.Character.hide(characters.Lewis);
                     await ƒS.update(0.2);
                     await ƒS.Speech.tell(characters.Narrator, "You don't manage to stop her as she lunges at you for a second time and even Lewis \
                     can't reach you in time.");
+                    await ƒS.Character.show(characters.Others, characters.Others.pose.red, ƒS.positionPercent(50, 100));
                     await ƒS.Character.hide(characters.Player);
                     await ƒS.update(0.2);
                     await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+                    await ƒS.Character.hide(characters.Others);
                     await ƒS.update(0.2);
                     await ƒS.Speech.tell(characters.Lewis, "NO!");
                     await ƒS.Character.hide(characters.Player);
@@ -153,9 +156,12 @@ namespace Template {
                     await ƒS.Speech.tell(characters.Player, "<i>I don't want to die...</i>");
                     return "badEnding";
                 } else {
+                    dataForSave.damageScore += 10;
+                    await ƒS.Character.show(characters.Others, characters.Others.pose.red, ƒS.positionPercent(50, 100));
                     await ƒS.Character.hide(characters.Player);
                     await ƒS.update(0.2);
                     await ƒS.Character.show(characters.Player, characters.Player.pose.hurt, ƒS.positionPercent(25, 100));
+                    await ƒS.Character.hide(characters.Others);
                     await ƒS.update(0.2);
                     await ƒS.Speech.tell(characters.Player, "Ugh!");
                     await ƒS.Speech.tell(characters.Narrator, "The zombie is pulled off of you and you only see Lewis ram a knife into her head and shortly\
@@ -191,6 +197,8 @@ namespace Template {
 
         }
 
+        await ƒS.Location.show(locations.base);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.Speech.tell(characters.Narrator, "After some more walking you two reach the edge of the city. The destruction here is less severe \
         here. Some broken cars and corpses are strewn across the road, but in contrast to the city it seems almost peaceful. Just a bit more and \
         your new life can begin. Soon you can rest.");

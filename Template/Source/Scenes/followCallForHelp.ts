@@ -11,6 +11,7 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.otherStreet);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "[At the garden center]");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));

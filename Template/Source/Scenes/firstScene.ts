@@ -10,9 +10,9 @@ namespace Template {
         ƒS.Speech.setTickerDelays(30, 5000); // kontrolliert die Textgeschwindigkeit -> cpms = characters per miliisecond
         // let signalDelay3: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(3)]);
 
+        ƒS.Speech.hide();
         await ƒS.Location.show(locations.apartmentOutside);
-        await ƒS.update();
-        await ƒS.Speech.tell(characters.Narrator, "[Outside of the Apartment]");
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "A sound from your right draws your attention just as you leave the apartment.");
@@ -49,15 +49,18 @@ namespace Template {
                 await ƒS.Speech.tell(characters.Narrator, "You shoot the zombie but you hear even more shuffling and groaning from all around you. A moment later more zombies appear in front of you.");
                 await ƒS.Speech.tell(characters.Narrator, "Suddenly you're grabbed from a zombie behind you while another scratches your arm.");
                 dataForSave.damageScore += 15;
+                await ƒS.Character.show(characters.Others, characters.Others.pose.red, ƒS.positionPercent(50, 100));
                 // await ƒS.update(0.2);
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.update(0.2);
                 await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+                await ƒS.Character.hide(characters.Others);
                 await ƒS.update(0.2);
                 await ƒS.Speech.tell(characters.Player, "Ugh, dammit! I have to run.");
                 await ƒS.Character.hide(characters.Zombie);
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.Location.show(locations.outdoorStairs);
+                await ƒS.update(transition.lines.duration, transition.lines.alpha, transition.lines.edge);
                 await ƒS.update(0.2);
                 await ƒS.Speech.tell(characters.Narrator, "");
                 break;
@@ -74,6 +77,7 @@ namespace Template {
                 await ƒS.Character.hide(characters.Zombie);
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.Location.show(locations.outdoorStairs);
+                await ƒS.update(transition.lines.duration, transition.lines.alpha, transition.lines.edge);
                 await ƒS.update(0.2);
                 await ƒS.Speech.tell(characters.Narrator, "");
                 break;
@@ -81,6 +85,7 @@ namespace Template {
         }
 
         await ƒS.Location.show(locations.railroadCrossing);
+        await ƒS.update(transition.lines.duration, transition.lines.alpha, transition.lines.edge);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "Out of sheer luck you find a railroad crossing with a map next to it.");
         await ƒS.Character.show(characters.Player, characters.Player.pose.happy, ƒS.positionPercent(30, 100));

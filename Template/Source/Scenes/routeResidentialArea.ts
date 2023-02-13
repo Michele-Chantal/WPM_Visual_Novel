@@ -11,6 +11,7 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.kitchen);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "[In an abandoned apartment]");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
@@ -31,6 +32,7 @@ namespace Template {
         await ƒS.Character.hide(characters.Player);
         await ƒS.update(0.1);
         await ƒS.Location.show(locations.livingRoom);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "You search through the rest of the apartment and find a golf club in the storage room.");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));

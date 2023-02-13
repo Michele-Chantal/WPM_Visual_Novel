@@ -11,6 +11,7 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.beach);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "Several weeks later");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral2, ƒS.positionPercent(30, 100));

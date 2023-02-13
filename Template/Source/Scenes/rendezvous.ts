@@ -11,8 +11,9 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.base);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Narrator, "[At Military Camp Delta]");
+        // await ƒS.Speech.tell(characters.Narrator, "[At Military Camp Delta]");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Player, "I made it to rendezvous in time.");

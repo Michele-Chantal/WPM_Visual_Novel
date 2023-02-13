@@ -11,6 +11,7 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.otherStreet);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
@@ -20,11 +21,13 @@ namespace Template {
             await ƒS.Speech.tell(characters.Narrator, "You keep walking for some minutes, when suddenly your head feels like you're underwater \
             and your sight gets blurry for a moment. You stumble and are just barely able to catch yourself on a wall but while doing so your hand \
             manages to scratch against a stray protruding nail there.");
+            dataForSave.damageScore += 5;
+            await ƒS.Character.show(characters.Others, characters.Others.pose.red, ƒS.positionPercent(50, 100));
             await ƒS.Character.hide(characters.Player);
             await ƒS.update(0.2);
             await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+            await ƒS.Character.hide(characters.Others);
             await ƒS.update(0.2);
-            dataForSave.damageScore += 5;
             await ƒS.Speech.tell(characters.Player, "Ah, fuck.");
             await ƒS.Speech.tell(characters.Player, "I didn't notice how dehydrated I was.");
             await ƒS.Character.hide(characters.Player);
@@ -88,12 +91,14 @@ namespace Template {
                         await ƒS.Speech.tell(characters.Player, "I am so sorry...");
                         await ƒS.Speech.tell(characters.Narrator, "You take out your knife and get close to Lewis. But you're scared you won't make \
                         it to the rendezvous in time so you make a mistake and accidentally kick an empty bottle that was lying just behind the zombie.")
-                        dataForSave.damageScore += 5;
                         if (dataForSave.damageScore == 50) {
                             await ƒS.Speech.tell(characters.Narrator, "Zombie-Lewis turns around and before you can react he goes for your neck.");
+                            dataForSave.damageScore += 5;
+                            await ƒS.Character.show(characters.Others, characters.Others.pose.red, ƒS.positionPercent(50, 100));
                             await ƒS.Character.hide(characters.Player);
                             await ƒS.update(0.2);
                             await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+                            await ƒS.Character.hide(characters.Others);
                             await ƒS.update(0.2);
                             await ƒS.Speech.tell(characters.Player, "AHHH!");
                             await ƒS.Character.hide(characters.Player);
@@ -106,9 +111,12 @@ namespace Template {
                         } else {
                             await ƒS.Speech.tell(characters.Narrator, "Zombie-Lewis turns around and manages to scratch open your arm, before you finally plunge the \
                             knife deep into his head. His body slumps to the ground");
+                            dataForSave.damageScore += 5;
+                            await ƒS.Character.show(characters.Others, characters.Others.pose.red, ƒS.positionPercent(50, 100));
                             await ƒS.Character.hide(characters.Player);
                             await ƒS.update(0.2);
                             await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+                            await ƒS.Character.hide(characters.Others);
                             await ƒS.update(0.2);
                             await ƒS.Speech.tell(characters.Player, "Shit.");
                         }

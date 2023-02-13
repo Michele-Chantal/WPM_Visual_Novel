@@ -21,11 +21,14 @@ namespace Template {
             await ƒS.Speech.tell(characters.Narrator, "With the knife you don't have enough reach to take it down before it's close enough to barrel \
             into you with such a force that you fall to the ground. And despite the hoodie you can feel your elbow scrape across the ground, drawing blood.");
             await ƒS.Character.hide(characters.Player);
+            dataForSave.damageScore += 10;
+            await ƒS.Character.show(characters.Others, characters.Others.pose.red, ƒS.positionPercent(50, 100));
             await ƒS.update(0.2);
             await ƒS.Character.show(characters.Player, characters.Player.pose.hurt2, ƒS.positionPercent(30, 100));
+            await ƒS.Character.hide(characters.Others);
             await ƒS.update(0.2);
             await ƒS.Speech.tell(characters.Player, "Shit.");
-            dataForSave.damageScore += 10;
+            
             await ƒS.Speech.tell(characters.Narrator, "But you manage to ram your knife into its head before it can take a bite out of you.");
         } else if (dataForSave.pickedUpBat == true) {
             await ƒS.Speech.tell(characters.Narrator, "You pull out your knife and quietly sneak towards the closest zombie. You manage to take \

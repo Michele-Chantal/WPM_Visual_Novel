@@ -23,7 +23,17 @@ declare namespace Template {
         pickedChoice: boolean;
     };
     let transition: {
-        puzzle: {
+        paintblobs: {
+            duration: number;
+            alpha: string;
+            edge: number;
+        };
+        lines: {
+            duration: number;
+            alpha: string;
+            edge: number;
+        };
+        vignette: {
             duration: number;
             alpha: string;
             edge: number;
@@ -191,6 +201,7 @@ declare namespace Template {
                 catPic: string;
                 golfClub: string;
                 memory: string;
+                red: string;
             };
         };
     };
@@ -199,6 +210,9 @@ declare namespace Template {
 }
 declare namespace Template {
     function Scene(): ƒS.SceneReturn;
+}
+declare namespace Template {
+    function credits(): Promise<void>;
 }
 declare namespace Template {
     function badEnding1(): ƒS.SceneReturn;

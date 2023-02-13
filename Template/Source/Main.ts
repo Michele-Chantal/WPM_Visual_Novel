@@ -29,18 +29,30 @@ namespace Template {
 
 
   export let transition = {
-    puzzle: { // name of transition?? Kann unbenannt werden
-      duration: 1,
+    paintblobs: {
+      duration: 1.1,
       // keine absoluten Pfade, sondern relative Pfad
-      alpha: "",
+      alpha: "Images/Transitions/paintblobs.jpg",
       // Härte der Transitions
-      edge: 1
+      edge: 2
+    },
+    lines: {
+      duration: 1,
+      alpha: "Images/Transitions/lines.jpg",
+      edge: 2
+    },
+    vignette: { //for bad ending
+      duration: 3,
+      alpha: "Images/Transitions/vignette.jpg",
+      edge: 1,
     }
   };
 
   // Sounds werden exportiert bzw. geladen
   export let sound = {
     // Sounds unterscheiden in Themes, SFX etc.
+    // Music/Themes
+
 
     // SFX
     drop: "Audio/drop.mp3"  //name of sound and the relative path to it, kann unbenannt werden
@@ -209,6 +221,7 @@ namespace Template {
         catPic: "Images/Items/cat_pic.png",
         golfClub: "Images/Items/golf_club.png",
         memory: "Images/Items/memory.png",
+        red: "Images/Items/red.png",
         // flower: "Images/Items/flower.png",       still unsure about this one
         // rations: "Images/Items/rations.png",      still unsure about this one
         // journal: "Images/Items/journal.png",      still unsure about this one
@@ -265,7 +278,7 @@ namespace Template {
         break;
       case inGameMenuButtons.credits:
         console.log("credits");
-      // credits(); //???
+        credits(); 
         break;
       case inGameMenuButtons.journal:
         journals();
@@ -306,7 +319,7 @@ namespace Template {
     // Scene Hierarchy
     let scenes: ƒS.Scenes = [
       // { id: "Test", scene: testScene, name: "Test" },
-      { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
+      // { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
       { id: "FirstScene", scene: firstScene, name: "First scene" },    // mit id kann man im Zusammenhang mit 'next' angeben, welche Szene als nächstes abgespielt wird
       { id: "residentialArea", scene: routeResidentialArea, name: "Residential area"},
       { id: "commercialArea", scene: routeCommercialArea, name: "Commercial area"},

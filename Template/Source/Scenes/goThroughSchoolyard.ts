@@ -11,8 +11,9 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.schoolyard);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Narrator, "[In a schoolyard]");
+        // await ƒS.Speech.tell(characters.Narrator, "[In a schoolyard]");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(25, 100));
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.neutral, ƒS.positionPercent(75, 100));
         await ƒS.update(0.5);
@@ -57,6 +58,7 @@ namespace Template {
         await ƒS.Speech.tell(characters.Player, "...");
 
         await ƒS.Location.show(locations.school);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "When you reach the school you hear something that sounds like crying.");
 
@@ -72,7 +74,8 @@ namespace Template {
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Lewis, "That sounds like crying, but something feels off. It's coming from the cafeteria.");
 
-        await ƒS.Location.show(locations.school);
+        await ƒS.Location.show(locations.cafeteria);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
 
         await ƒS.Character.hide(characters.Player);
@@ -128,6 +131,8 @@ namespace Template {
 
         }
 
+        await ƒS.Location.show(locations.base);
+        await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.Speech.tell(characters.Narrator, "After some more walking you two reach the edge of the city. The destruction here is less severe. \
         Some broken cars and corpses are strewn across the road, but in contrast to the city it seems almost peaceful. Just a bit more and \
         your new life can begin. Soon you can rest.");

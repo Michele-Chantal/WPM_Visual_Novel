@@ -5,7 +5,7 @@ namespace Template {
         - Aim for the head => Their brains are their weakness <br><br> - Use melee weapons if possible => Sound attracts them <br><br> - Don't give up", "Day 13, <br><br>\
         It's been a few days since the apocalypse started. Everyday it's getting harder to find survivors and I'm starting to lose hope. Is this going to be the end of humanity?",
         "Day 26, <br><br> I lost all contact to the military headquarters. Were they overrun or is something interferring with the radios? I really hope it's the latter... \
-        I don't know how good our chances are if we lost the military.", "Day 45, I don't know if I can keep doing this..."];
+        I don't know how good our chances are if we lost the military.", "Day 45, <br><br> I don't know if I can keep doing this..."];
 
         // Alle Journalseiten in einer if-Abfrage abfragen mit boolschen Werten in dataForSave; z.B. iSayYes = false und nachdem man 'Yes' gewählt hat wird iSayYes = true und die richtige Novelpage wird angezeigt
         let current: number = 0;

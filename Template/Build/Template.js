@@ -6,7 +6,7 @@ var Template;
         - Aim for the head => Their brains are their weakness <br><br> - Use melee weapons if possible => Sound attracts them <br><br> - Don't give up", "Day 13, <br><br>\
         It's been a few days since the apocalypse started. Everyday it's getting harder to find survivors and I'm starting to lose hope. Is this going to be the end of humanity?",
             "Day 26, <br><br> I lost all contact to the military headquarters. Were they overrun or is something interferring with the radios? I really hope it's the latter... \
-        I don't know how good our chances are if we lost the military.", "Day 45, I don't know if I can keep doing this..."];
+        I don't know how good our chances are if we lost the military.", "Day 45, <br><br> I don't know if I can keep doing this..."];
         // Alle Journalseiten in einer if-Abfrage abfragen mit boolschen Werten in dataForSave; z.B. iSayYes = false und nachdem man 'Yes' gewählt hat wird iSayYes = true und die richtige Novelpage wird angezeigt
         let current = 0;
         let numberAquired = 0;
@@ -143,17 +143,28 @@ var Template;
         pickedChoice: false
     };
     Template.transition = {
-        puzzle: {
-            duration: 1,
+        paintblobs: {
+            duration: 1.1,
             // keine absoluten Pfade, sondern relative Pfad
-            alpha: "",
+            alpha: "Images/Transitions/paintblobs.jpg",
             // Härte der Transitions
-            edge: 1
+            edge: 2
+        },
+        lines: {
+            duration: 1,
+            alpha: "Images/Transitions/lines.jpg",
+            edge: 2
+        },
+        vignette: {
+            duration: 3,
+            alpha: "Images/Transitions/vignette.jpg",
+            edge: 1,
         }
     };
     // Sounds werden exportiert bzw. geladen
     Template.sound = {
         // Sounds unterscheiden in Themes, SFX etc.
+        // Music/Themes
         // SFX
         drop: "Audio/drop.mp3" //name of sound and the relative path to it, kann unbenannt werden
     };
@@ -318,6 +329,7 @@ var Template;
                 catPic: "Images/Items/cat_pic.png",
                 golfClub: "Images/Items/golf_club.png",
                 memory: "Images/Items/memory.png",
+                red: "Images/Items/red.png",
                 // flower: "Images/Items/flower.png",       still unsure about this one
                 // rations: "Images/Items/rations.png",      still unsure about this one
                 // journal: "Images/Items/journal.png",      still unsure about this one
@@ -369,7 +381,7 @@ var Template;
                 break;
             case inGameMenuButtons.credits:
                 console.log("credits");
-                // credits(); //???
+                Template.credits();
                 break;
             case inGameMenuButtons.journal:
                 Template.journals();
@@ -409,7 +421,7 @@ var Template;
         // Scene Hierarchy
         let scenes = [
             // { id: "Test", scene: testScene, name: "Test" },
-            { id: "Prologue", scene: Template.prologue, name: "Prologue" },
+            // { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
             { id: "FirstScene", scene: Template.firstScene, name: "First scene" },
             { id: "residentialArea", scene: Template.routeResidentialArea, name: "Residential area" },
             { id: "commercialArea", scene: Template.routeCommercialArea, name: "Commercial area" },
@@ -442,11 +454,23 @@ var Template;
 })(Template || (Template = {}));
 var Template;
 (function (Template) {
+    async function credits() {
+        await Template.ƒS.Text.print("<strong>Credits</strong> <br><br> <i>Characters:</i> <br> All characters by Michele-Chantal Oeun (me) in VRoid <br><br> <i>Character Assets:</i> <br>\
+        Hoodie by mio (https://mo-shop.booth.pm/) <br> Wounds/Blood by Akira's Creations (https://arttai.booth.pm/) <br> Bloody Eye by TwoEzStore \
+        (https://twoezdragon.booth.pm/) <br><br>  <i>Backgrounds:</i> <br> Background Pack by Noraneko Games <br> Beach Background by Selidor (https://robingoodwin.co.uk \
+        & https://twitter.com/Selidor) <br> Cabin in woods by tatsuya (https://www.pixiv.net/en/users/2206379) <br><br> <i>Music:</i> <br> ??? <br><br> \
+        <i>SFX:</i> <br> ???");
+    }
+    Template.credits = credits;
+})(Template || (Template = {}));
+var Template;
+(function (Template) {
     async function badEnding1() {
         console.log("Scene: Bad Ending 1");
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.dark);
+        await Template.ƒS.update(Template.transition.vignette.duration, Template.transition.vignette.alpha, Template.transition.vignette.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "GAME OVER!");
         await Template.ƒS.update(0.2);
@@ -464,8 +488,9 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.otherStreet);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[Somewhere outside]");
+        // await ƒS.Speech.tell(characters.Narrator, "[Somewhere outside]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Radio, "'<i>Hello, can anyone hear me?</i>'");
@@ -533,9 +558,9 @@ var Template;
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000); // kontrolliert die Textgeschwindigkeit -> cpms = characters per miliisecond
         // let signalDelay3: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(3)]);
+        Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.apartmentOutside);
-        await Template.ƒS.update();
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[Outside of the Apartment]");
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "A sound from your right draws your attention just as you leave the apartment.");
@@ -565,15 +590,18 @@ var Template;
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "You shoot the zombie but you hear even more shuffling and groaning from all around you. A moment later more zombies appear in front of you.");
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "Suddenly you're grabbed from a zombie behind you while another scratches your arm.");
                 Template.dataForSave.damageScore += 15;
+                await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.red, Template.ƒS.positionPercent(50, 100));
                 // await ƒS.update(0.2);
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                await Template.ƒS.Character.hide(Template.characters.Others);
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Speech.tell(Template.characters.Player, "Ugh, dammit! I have to run.");
                 await Template.ƒS.Character.hide(Template.characters.Zombie);
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.Location.show(Template.locations.outdoorStairs);
+                await Template.ƒS.update(Template.transition.lines.duration, Template.transition.lines.alpha, Template.transition.lines.edge);
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "");
                 break;
@@ -589,11 +617,13 @@ var Template;
                 await Template.ƒS.Character.hide(Template.characters.Zombie);
                 await Template.ƒS.Character.hide(Template.characters.Player);
                 await Template.ƒS.Location.show(Template.locations.outdoorStairs);
+                await Template.ƒS.update(Template.transition.lines.duration, Template.transition.lines.alpha, Template.transition.lines.edge);
                 await Template.ƒS.update(0.2);
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "");
                 break;
         }
         await Template.ƒS.Location.show(Template.locations.railroadCrossing);
+        await Template.ƒS.update(Template.transition.lines.duration, Template.transition.lines.alpha, Template.transition.lines.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "Out of sheer luck you find a railroad crossing with a map next to it.");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy, Template.ƒS.positionPercent(30, 100));
@@ -642,6 +672,7 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.otherStreet);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "[At the garden center]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
@@ -736,8 +767,9 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.schoolyard);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[In a schoolyard]");
+        // await ƒS.Speech.tell(characters.Narrator, "[In a schoolyard]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.neutral, Template.ƒS.positionPercent(75, 100));
         await Template.ƒS.update(0.5);
@@ -781,6 +813,7 @@ var Template;
         await Template.ƒS.Speech.tell(Template.characters.Lewis, "I'm so glad to have met you. Back then and now.");
         await Template.ƒS.Speech.tell(Template.characters.Player, "...");
         await Template.ƒS.Location.show(Template.locations.school);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "When you reach the school you hear something that sounds like crying.");
         await Template.ƒS.Character.hide(Template.characters.Player);
@@ -793,7 +826,8 @@ var Template;
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.surprised, Template.ƒS.positionPercent(75, 100));
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Lewis, "That sounds like crying, but something feels off. It's coming from the cafeteria.");
-        await Template.ƒS.Location.show(Template.locations.school);
+        await Template.ƒS.Location.show(Template.locations.cafeteria);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Character.hide(Template.characters.Player);
         await Template.ƒS.Character.hide(Template.characters.Lewis);
@@ -842,6 +876,8 @@ var Template;
                 await Template.ƒS.Character.hide(Template.characters.Zombie);
                 break;
         }
+        await Template.ƒS.Location.show(Template.locations.base);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "After some more walking you two reach the edge of the city. The destruction here is less severe. \
         Some broken cars and corpses are strewn across the road, but in contrast to the city it seems almost peaceful. Just a bit more and \
         your new life can begin. Soon you can rest.");
@@ -862,8 +898,9 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.sideStreet);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[In a side street]");
+        // await ƒS.Speech.tell(characters.Narrator, "[In a side street]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
         await Template.ƒS.Character.show(Template.characters.Lewis, Template.characters.Lewis.pose.neutral, Template.ƒS.positionPercent(75, 100));
         await Template.ƒS.update(0.5);
@@ -980,15 +1017,17 @@ var Template;
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "A few seconds pass and her body stays motionless and your gaze finds Lewis'. But that was a mistake.");
                 await Template.ƒS.Speech.tell(Template.characters.Narrator, "In the short time you take your eyes off of her she lunges forward and manages to tear \
                 through your pants and draw blood.");
-                Template.dataForSave.damageScore += 10;
                 if (Template.dataForSave.damageScore == 50) {
+                    Template.dataForSave.damageScore += 10;
                     await Template.ƒS.Character.hide(Template.characters.Lewis);
                     await Template.ƒS.update(0.2);
                     await Template.ƒS.Speech.tell(Template.characters.Narrator, "You don't manage to stop her as she lunges at you for a second time and even Lewis \
                     can't reach you in time.");
+                    await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.red, Template.ƒS.positionPercent(50, 100));
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                    await Template.ƒS.Character.hide(Template.characters.Others);
                     await Template.ƒS.update(0.2);
                     await Template.ƒS.Speech.tell(Template.characters.Lewis, "NO!");
                     await Template.ƒS.Character.hide(Template.characters.Player);
@@ -1000,9 +1039,12 @@ var Template;
                     return "badEnding";
                 }
                 else {
+                    Template.dataForSave.damageScore += 10;
+                    await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.red, Template.ƒS.positionPercent(50, 100));
                     await Template.ƒS.Character.hide(Template.characters.Player);
                     await Template.ƒS.update(0.2);
                     await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt, Template.ƒS.positionPercent(25, 100));
+                    await Template.ƒS.Character.hide(Template.characters.Others);
                     await Template.ƒS.update(0.2);
                     await Template.ƒS.Speech.tell(Template.characters.Player, "Ugh!");
                     await Template.ƒS.Speech.tell(Template.characters.Narrator, "The zombie is pulled off of you and you only see Lewis ram a knife into her head and shortly\
@@ -1035,6 +1077,8 @@ var Template;
                     break;
                 }
         }
+        await Template.ƒS.Location.show(Template.locations.base);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "After some more walking you two reach the edge of the city. The destruction here is less severe \
         here. Some broken cars and corpses are strewn across the road, but in contrast to the city it seems almost peaceful. Just a bit more and \
         your new life can begin. Soon you can rest.");
@@ -1054,7 +1098,7 @@ var Template;
         document.getElementById("scoreForDamage").style.display = "";
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
-        await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.Location.show(Template.locations.otherStreet);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "[Further in the City]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(25, 100));
@@ -1140,6 +1184,7 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.cabinInForest);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "Several weeks later");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.happy2, Template.ƒS.positionPercent(35, 100));
@@ -1177,6 +1222,7 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.beach);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "Several weeks later");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral2, Template.ƒS.positionPercent(30, 100));
@@ -1217,11 +1263,13 @@ var Template;
             await Template.ƒS.Speech.tell(Template.characters.Narrator, "With the knife you don't have enough reach to take it down before it's close enough to barrel \
             into you with such a force that you fall to the ground. And despite the hoodie you can feel your elbow scrape across the ground, drawing blood.");
             await Template.ƒS.Character.hide(Template.characters.Player);
+            Template.dataForSave.damageScore += 10;
+            await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.red, Template.ƒS.positionPercent(50, 100));
             await Template.ƒS.update(0.2);
             await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+            await Template.ƒS.Character.hide(Template.characters.Others);
             await Template.ƒS.update(0.2);
             await Template.ƒS.Speech.tell(Template.characters.Player, "Shit.");
-            Template.dataForSave.damageScore += 10;
             await Template.ƒS.Speech.tell(Template.characters.Narrator, "But you manage to ram your knife into its head before it can take a bite out of you.");
         }
         else if (Template.dataForSave.pickedUpBat == true) {
@@ -1362,6 +1410,7 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.otherStreet);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
@@ -1370,11 +1419,13 @@ var Template;
             await Template.ƒS.Speech.tell(Template.characters.Narrator, "You keep walking for some minutes, when suddenly your head feels like you're underwater \
             and your sight gets blurry for a moment. You stumble and are just barely able to catch yourself on a wall but while doing so your hand \
             manages to scratch against a stray protruding nail there.");
+            Template.dataForSave.damageScore += 5;
+            await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.red, Template.ƒS.positionPercent(50, 100));
             await Template.ƒS.Character.hide(Template.characters.Player);
             await Template.ƒS.update(0.2);
             await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+            await Template.ƒS.Character.hide(Template.characters.Others);
             await Template.ƒS.update(0.2);
-            Template.dataForSave.damageScore += 5;
             await Template.ƒS.Speech.tell(Template.characters.Player, "Ah, fuck.");
             await Template.ƒS.Speech.tell(Template.characters.Player, "I didn't notice how dehydrated I was.");
             await Template.ƒS.Character.hide(Template.characters.Player);
@@ -1432,12 +1483,14 @@ var Template;
                         await Template.ƒS.Speech.tell(Template.characters.Player, "I am so sorry...");
                         await Template.ƒS.Speech.tell(Template.characters.Narrator, "You take out your knife and get close to Lewis. But you're scared you won't make \
                         it to the rendezvous in time so you make a mistake and accidentally kick an empty bottle that was lying just behind the zombie.");
-                        Template.dataForSave.damageScore += 5;
                         if (Template.dataForSave.damageScore == 50) {
                             await Template.ƒS.Speech.tell(Template.characters.Narrator, "Zombie-Lewis turns around and before you can react he goes for your neck.");
+                            Template.dataForSave.damageScore += 5;
+                            await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.red, Template.ƒS.positionPercent(50, 100));
                             await Template.ƒS.Character.hide(Template.characters.Player);
                             await Template.ƒS.update(0.2);
                             await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                            await Template.ƒS.Character.hide(Template.characters.Others);
                             await Template.ƒS.update(0.2);
                             await Template.ƒS.Speech.tell(Template.characters.Player, "AHHH!");
                             await Template.ƒS.Character.hide(Template.characters.Player);
@@ -1451,9 +1504,12 @@ var Template;
                         else {
                             await Template.ƒS.Speech.tell(Template.characters.Narrator, "Zombie-Lewis turns around and manages to scratch open your arm, before you finally plunge the \
                             knife deep into his head. His body slumps to the ground");
+                            Template.dataForSave.damageScore += 5;
+                            await Template.ƒS.Character.show(Template.characters.Others, Template.characters.Others.pose.red, Template.ƒS.positionPercent(50, 100));
                             await Template.ƒS.Character.hide(Template.characters.Player);
                             await Template.ƒS.update(0.2);
                             await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt2, Template.ƒS.positionPercent(30, 100));
+                            await Template.ƒS.Character.hide(Template.characters.Others);
                             await Template.ƒS.update(0.2);
                             await Template.ƒS.Speech.tell(Template.characters.Player, "Shit.");
                         }
@@ -1528,6 +1584,7 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.oldStreet);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
@@ -1587,7 +1644,7 @@ var Template;
         Template.dataForSave.pickedMeterScene = true;
         document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
         document.getElementById("scoreForDamage").style.display = "";
-        Template.ƒS.Speech.setTickerDelays(80, 5000); // kontrolliert die Textgeschwindigkeit -> cpms = characters per miliisecond
+        Template.ƒS.Speech.setTickerDelays(40, 5000); // kontrolliert die Textgeschwindigkeit -> cpms = characters per miliisecond
         // let signalDelay3: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(3)]);
         Template.ƒS.Speech.hide(); //hides the speech --> verhindert, dass man die speechbox sofort mit Beginn der Szene sieht
         await Template.ƒS.Location.show(Template.locations.oldKitchen);
@@ -1608,6 +1665,7 @@ var Template;
         and I'm starting to lose hope. Is this going to be the end of humanity?");
         await Template.ƒS.Text.print("Day 26, <br><br> I lost all contact to the military headquarters. Were they overrun or is something interferring \
         with the radios? I really hope it's the latter... I don't know how good our chances are if we lost the military.");
+        await Template.ƒS.Text.print("Day 45, <br><br> I don't know if I can keep doing this...");
         await Template.ƒS.update();
         await Template.ƒS.Character.hide(Template.characters.Player);
         await Template.ƒS.Speech.tell(Template.characters.Player, "A zombie apocalypse? Ah yes, I remember now. But who...");
@@ -1654,8 +1712,9 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.base);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
-        await Template.ƒS.Speech.tell(Template.characters.Narrator, "[At Military Camp Delta]");
+        // await ƒS.Speech.tell(characters.Narrator, "[At Military Camp Delta]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
         await Template.ƒS.update(0.5);
         await Template.ƒS.Speech.tell(Template.characters.Player, "I made it to rendezvous in time.");
@@ -1703,6 +1762,7 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.restaurant);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "[At an abandoned restaurant]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
@@ -1774,6 +1834,7 @@ var Template;
         Template.ƒS.Speech.setTickerDelays(30, 5000);
         Template.ƒS.Speech.hide();
         await Template.ƒS.Location.show(Template.locations.kitchen);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "[In an abandoned apartment]");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
@@ -1794,6 +1855,7 @@ var Template;
         await Template.ƒS.Character.hide(Template.characters.Player);
         await Template.ƒS.update(0.1);
         await Template.ƒS.Location.show(Template.locations.livingRoom);
+        await Template.ƒS.update(Template.transition.paintblobs.duration, Template.transition.paintblobs.alpha, Template.transition.paintblobs.edge);
         await Template.ƒS.update(0.2);
         await Template.ƒS.Speech.tell(Template.characters.Narrator, "You search through the rest of the apartment and find a golf club in the storage room.");
         await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
@@ -1844,9 +1906,31 @@ var Template;
         // await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         // ƒS.update();
         // await ƒS.Speech.tell(characters.Player, "Test");
-        await Template.ƒS.Text.print("How to survive the Zombie Apocalypse: <br><br><br> - Avoid getting bitten -> Infection will spread like that <br><br> - Aim for the head -> Their brains are their weakness <br><br> - Use melee weapons if possible -> Sound attracts them <br><br> - Don't give up");
+        // await ƒS.Text.print("How to survive the Zombie Apocalypse: <br><br><br> - Avoid getting bitten -> Infection will spread like that <br><br> - Aim for the head -> Their brains are their weakness <br><br> - Use melee weapons if possible -> Sound attracts them <br><br> - Don't give up")
         // await ƒS.Text.print("Day 23 <br><br> It's been a few weeks since the apocalypse started. Everyday it's getting harder to find survivors and I'm starting to lose hope. ");   
         // await ƒS.update();
+        Template.dataForSave.pickedMeterScene = true;
+        document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = false);
+        document.getElementById("scoreForDamage").style.display = "";
+        Template.ƒS.Speech.setTickerDelays(80, 5000); // kontrolliert die Textgeschwindigkeit -> cpms = characters per miliisecond
+        // let signalDelay3: ƒS.Signal = ƒS.Progress.defineSignal([() => ƒS.Progress.delay(3)]);
+        Template.ƒS.Speech.hide(); //hides the speech --> verhindert, dass man die speechbox sofort mit Beginn der Szene sieht
+        await Template.ƒS.Location.show(Template.locations.oldKitchen);
+        await Template.ƒS.update();
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.hurt, Template.ƒS.positionPercent(30, 100)); // beim hovern wird Aufbau angezeigt
+        await Template.ƒS.update(); // immer nach Location-Wechsel
+        // signalDelay3();
+        await Template.ƒS.Speech.tell(Template.characters.Player, "Huh, what... Where am I? Ouch, my head...");
+        await Template.ƒS.Character.hide(Template.characters.Player);
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Location.show(Template.locations.kitchen);
+        // await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge); //-> yes
+        // await ƒS.update(transition.lines.duration, transition.lines.alpha, transition.lines.edge); //-> maybe
+        // await ƒS.update(transition.hair.duration, transition.hair.alpha, transition.hair.edge); //-> dont know
+        await Template.ƒS.update();
+        await Template.ƒS.Character.show(Template.characters.Player, Template.characters.Player.pose.neutral, Template.ƒS.positionPercent(30, 100));
+        await Template.ƒS.update(0.2);
+        await Template.ƒS.Speech.tell(Template.characters.Player, "There is a journal here.");
         // Welche Entscheidungsmöglichkeiten gibt es 
         let decision = {
             iSayYes: "Yes",
