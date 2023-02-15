@@ -233,3 +233,61 @@ input[id="scoreForDamage"] {
   width: 4%;
   border-radius: 10%;
 }
+
+@media screen and (max-width: 700px) {
+  speech{
+    height: fit-content;
+    min-height: unset;
+    width: 60%;
+    line-height: 0.5;
+  }
+  speech content {
+    font-size: 8px;
+    margin: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  speech name {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    color: #a81c07;
+    font-variant: small-caps;
+    font-size: 8px;
+    margin: 5px;
+  }
+  input[id="scoreForDamage"] {
+    font-size: 4.5pt;
+    position: absolute;
+    left: 1%;
+    bottom: 15.5%;
+    width: 6%;
+    /* margin-bottom: -10px; */
+  }
+  meter[id="damageMeter"] {
+    position: absolute;
+    transform: rotate(-90deg);
+    bottom: 50%;
+    left: -13%;
+    width: 35%;
+    height: 10%;
+  }
+  .gameMenuCSSClass {
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 25px;
+  }
+  button {
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 2px;
+    font-size:x-small;
+  }
+  dialog[type=text] {
+    height: 300px;
+    width: 300px;
+    margin-top: 45%;
+    margin-left: 15px;
+    line-height: 1.4;
+    padding: 4%;
+    font-size: 11pt;
+  }
+}
