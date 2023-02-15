@@ -1,7 +1,7 @@
-declare namespace Template {
+declare namespace Remember {
     function journals(): Promise<void>;
 }
-declare namespace Template {
+declare namespace Remember {
     export import ƒ = FudgeCore;
     export import ƒS = FudgeStory;
     let dataForSave: {
@@ -40,7 +40,23 @@ declare namespace Template {
         };
     };
     let sound: {
-        drop: string;
+        alone: string;
+        assault: string;
+        dawn: string;
+        lost: string;
+        stars: string;
+        survivor: string;
+        gunshot: string;
+        hit: string;
+        radio: string;
+        hitWithClub: string;
+        hitWithKnife: string;
+        zombie: string;
+        zombie2: string;
+        grunting: string;
+        running: string;
+        bodyFall: string;
+        death: string;
     };
     let locations: {
         oldKitchen: {
@@ -125,8 +141,6 @@ declare namespace Template {
                 happy: string;
                 happy2: string;
                 sad: string;
-                sad2: string;
-                angry: string;
                 surprised: string;
                 confused: string;
                 hurt: string;
@@ -139,12 +153,9 @@ declare namespace Template {
             origin: ƒ.ORIGIN2D;
             pose: {
                 neutral: string;
-                neutral2: string;
                 happy: string;
                 happy2: string;
                 sad: string;
-                sad2: string;
-                angry: string;
                 surprised: string;
                 worried: string;
                 zombie: string;
@@ -199,72 +210,72 @@ declare namespace Template {
             origin: ƒ.ORIGIN2D;
             pose: {
                 catPic: string;
-                golfClub: string;
                 memory: string;
                 red: string;
             };
         };
     };
-    function animation(): ƒS.AnimationDefinition;
-    function getAnimation(): ƒS.AnimationDefinition;
+    function moveItemInFrame(): ƒS.AnimationDefinition;
+    function playerGetsHit(): ƒS.AnimationDefinition;
+    function enemyGetsHit(): ƒS.AnimationDefinition;
 }
-declare namespace Template {
+declare namespace Remember {
     function Scene(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function credits(): Promise<void>;
 }
-declare namespace Template {
-    function badEnding1(): ƒS.SceneReturn;
+declare namespace Remember {
+    function badEnding(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function callForHelp(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function empty(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function firstScene(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function followCallForHelp(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function goThroughSchoolyard(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function goThroughSideStreet(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function goWithLewis(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function goodEnding1(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function goodEnding2(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function helpingTheSurvivors(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function ignoreCallForHelp(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function meetingSurvivors(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function prologue(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function rendezvous(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function routeCommercialArea(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function routeResidentialArea(): ƒS.SceneReturn;
 }
-declare namespace Template {
+declare namespace Remember {
     function testScene(): ƒS.SceneReturn;
 }

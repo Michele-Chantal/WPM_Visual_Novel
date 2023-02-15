@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function goodEnding2(): ƒS.SceneReturn {
 
         console.log("Scene: Good Ending 2");
@@ -10,6 +10,7 @@ namespace Template {
         ƒS.Speech.setTickerDelays(30, 5000); 
 
         ƒS.Speech.hide();
+        ƒS.Sound.fade(sound.survivor, 0.5, 0.1, true);
         await ƒS.Location.show(locations.beach);
         await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
@@ -30,7 +31,7 @@ namespace Template {
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "GOOD ENDING 2!");
         await ƒS.update(0.2);
-    
+        ƒS.Sound.fade(sound.survivor, 0, 0.1, false);
         return "emptyScene";
 
     }

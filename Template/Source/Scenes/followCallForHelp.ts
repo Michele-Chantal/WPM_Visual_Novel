@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function followCallForHelp(): ƒS.SceneReturn {
 
         console.log("Scene: Follow the call for help");
@@ -10,13 +10,13 @@ namespace Template {
         ƒS.Speech.setTickerDelays(30, 5000);
 
         ƒS.Speech.hide();
+        ƒS.Sound.fade(sound.assault, 0.6, 0.1, true);
         await ƒS.Location.show(locations.otherStreet);
         await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Narrator, "[At the garden center]");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
-        await ƒS.Speech.tell(characters.Narrator, "You round the corner to the west entrance and immediately notice four zombies clawing at the backdoor.");
+        await ƒS.Speech.tell(characters.Narrator, "You reach the garden center and round the corner to the west entrance and immediately notice four zombies clawing at the backdoor.");
         await ƒS.Speech.tell(characters.Player, "Just four zombies? I should be able to deal with them. Just need to find something elevated to \
         stay out of their reach, just to be safe.");
         await ƒS.Speech.tell(characters.Player, "I could climb on that hedge, should be high enough.");
@@ -35,30 +35,36 @@ namespace Template {
         corner of your eyes you see the door open, but you keep your focus on the zombies.");
 
         if (dataForSave.pickedUpBat == true) {
+            ƒS.Sound.fade(sound.zombie, 0.2, 0.1, false);
+            ƒS.Sound.fade(sound.hitWithClub, 0.2, 0.1, false);
+            ƒS.Sound.fade(sound.bodyFall, 0.1, 0.1, false);
             await ƒS.Speech.tell(characters.Narrator, "As soon as the first zombie is in reach, you swing your club and smash its head in. With a \
             satisfying 'thump' its body slumps to the ground. The next one uses that moment to grab for your leg, but you kick it away and deal \
             a few deals to its head.");
         } else if (dataForSave.pickedUpBat == false) {
+            ƒS.Sound.fade(sound.zombie, 0.2, 0.1, false);
+            ƒS.Sound.fade(sound.hitWithKnife, 0.2, 0.1, false);
+            ƒS.Sound.fade(sound.bodyFall, 0.1, 0.1, false);
             await ƒS.Speech.tell(characters.Narrator, "As soon as the first zombie is in reach, you stab your knife into its head. While you try \
             to pull your knife out of the first zombie's brain, the next one uses that moment to grab for your leg. But you manage to free your knife \
             in time to ram it through its head.");
         }
-        await ƒS.Character.show(characters.Zombie, characters.Zombie.pose.zombieM, ƒS.positionPercent(70, 100));
-        await ƒS.update(0.5);
         await ƒS.Character.hide(characters.Zombie);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "You turn to the last two zombies only to find them already dead on the ground with a blond haired \
         man standing over them, who is already staring at you.");
+        ƒS.Sound.fade(sound.assault, 0, 0.1, false);
+        ƒS.Sound.fade(sound.stars, 0.5, 0.1, true);
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.surprised, ƒS.positionPercent(70, 100));
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Player, "Rush? It's you.");
+        await ƒS.Speech.tell("???", "Rush? It's you.");
         await ƒS.Speech.tell(characters.Narrator, "You climb down from the hedge and walk closer to the man.");
         await ƒS.Speech.tell(characters.Player, "Who?");
         await ƒS.Character.hide(characters.Lewis);
         await ƒS.update(0.2);
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.worried, ƒS.positionPercent(70, 100));
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Lewis, "But, I thought-");
+        await ƒS.Speech.tell("???", "But, I thought-");
         await ƒS.Character.hide(characters.Lewis);
         await ƒS.update(0.2);
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.happy, ƒS.positionPercent(70, 100));
@@ -73,7 +79,7 @@ namespace Template {
         await ƒS.Speech.tell(characters.Player, "No, I'm... traveling alone.");
         await ƒS.Speech.tell(characters.Lewis, "Great!");
         await ƒS.Speech.tell(characters.Lewis, "I mean, I was planing to leave the city, I know of a cabin some way from the city. \
-        It belonged to my uncle and he mostly used it to get away from the all the stress and work, so it should be stocked. If you don't have any \
+        It belonged to my uncle and he mostly used it to get away from all the stress and work, so it should be stocked. If you don't have any \
         other plans you could come with me.");
         await ƒS.Speech.tell(characters.Player, "But you don't even know me.");
         await ƒS.Speech.tell(characters.Lewis, "You saved me. I know that you're a good person.");
@@ -93,6 +99,7 @@ namespace Template {
 
         await ƒS.Character.hide(characters.Lewis);
         await ƒS.Character.hide(characters.Player);
+        ƒS.Sound.fade(sound.stars, 0, 0.1, false);
         await ƒS.update(0.2);
         return "goWithLewis";
 

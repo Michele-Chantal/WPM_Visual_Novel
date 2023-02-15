@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Remember.css">
+  <script src="Fudge/FudgeCore.js"></script>
+  <script src="FudgeStory/FudgeStory.js"></script>
+  <script src="./Build/Template.js"></script>
+  <title>Remember</title>
+  <splash src="Images/screen.png" />
+</head>
+
+<body>
+  <scene>
+
+    <!-- <dialog type="splash" open>
+      <img src="Images/cover.png" alt="Splashscreen">
+    </dialog> -->
+
+    <dialog type="splash" open>
+      <img src="Images/cover.png" alt="Splashscreen">
+      <img id="FudgeStoryLogo" theme="light" />
+      <p>
+      </p>
+    </dialog>
+
+    <canvas></canvas>
+
+    <speech>
+      <name></name>
+      <content></content>
+    </speech>
+
+    <dialog type="text">
+      The content of a page of text for reading
+    </dialog>
+
+    <!-- Damage Meterbar -->
+    <div type="interface">
+      <input id="scoreForDamage" type="text" value="Damage" disabled>
+      <!-- für value der Skala; Füllung -->
+      <meter id="damageMeter" name="damageScore" min="0" max="50" disabled></meter> <!--  -->
+      <script>
+        document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = true);
+        document.getElementById("scoreForDamage").style.display = "none";
+      </script>
+
+    </div>
+
+  </scene>
+</body>
+
+</html>

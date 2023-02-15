@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function goWithLewis(): ƒS.SceneReturn {
 
         console.log("Scene: Go with Lewis");
@@ -10,10 +10,11 @@ namespace Template {
         ƒS.Speech.setTickerDelays(30, 5000); 
 
         ƒS.Speech.hide();
+        ƒS.Sound.fade(sound.stars, 0.5, 0.1, true);
         await ƒS.Location.show(locations.otherStreet);
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "[Further in the City]");
-        await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(25, 100));
+        await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.neutral, ƒS.positionPercent(75, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Lewis, "This way.");
@@ -26,7 +27,7 @@ namespace Template {
         await ƒS.Speech.tell(characters.Lewis, "So you really don't remember?");
         await ƒS.Character.hide(characters.Player);
         await ƒS.update(0.2);
-        await ƒS.Character.show(characters.Player, characters.Player.pose.confused, ƒS.positionPercent(75, 100));
+        await ƒS.Character.show(characters.Player, characters.Player.pose.confused, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Player, "I woke up this morning in an apartment I didn't know and the only things I could remember were my \
         name and that I was a soldier. I've been slowly remembering random little things, but most of my past is still blank.");
@@ -44,7 +45,7 @@ namespace Template {
         life to pull me back to safety. After that I never strayed far from your side.");
         await ƒS.Character.hide(characters.Player);
         await ƒS.update(0.2);
-        await ƒS.Character.show(characters.Player, characters.Player.pose.happy, ƒS.positionPercent(75, 100));
+        await ƒS.Character.show(characters.Player, characters.Player.pose.happy, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Player, "Oh, that's right, you kept following me around like a lost puppy.");
         await ƒS.Character.hide(characters.Lewis);
@@ -52,12 +53,15 @@ namespace Template {
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.happy, ƒS.positionPercent(75, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Lewis, "Because you finally started opening up after that! And I realized how nice it was to be at your side.");
-        await ƒS.Speech.tell(characters.Player, "Can you wait for a moment?");
-        await ƒS.Speech.tell(characters.Lewis, "Of course");
+        await ƒS.Speech.tell(characters.Player, "Thank you for telling me. Can you wait for a moment?");
+        await ƒS.Speech.tell(characters.Lewis, "Of course.");
+        await ƒS.Speech.tell(characters.Narrator, "You pull out your journal to write everything down.");
         await ƒS.Text.print("I just met someone from my past, his name is Lewis. We served together in the military and after he got shot in the \
         shoulder in a battle I saved him and after that we became close, because he kept following me around. I guess I kind of just warmed up \
-        to him and it became normal to seek each other out.");
+        to him and it became normal to seek each other out. <br><br> According to him I joined the military when I was 20 years old and spent \
+        at least three years there. And I am 32 years old.");
         dataForSave.novelLewis = true;
+        await ƒS.Speech.tell(characters.Player, "Okay, I'm done.");
         await ƒS.Speech.tell(characters.Lewis, "Alright, which way do you want to take? We could go through a side street or through the school. \
         Both will take us to the edge of the city. It's your call.");
 
@@ -78,6 +82,7 @@ namespace Template {
                 await ƒS.Character.hide(characters.Lewis);
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.update(0.2);
+                ƒS.Sound.fade(sound.stars, 0, 0.1, false);
                 return "goThroughSideStreet";
                 break;
 
@@ -88,6 +93,7 @@ namespace Template {
                 await ƒS.Character.hide(characters.Lewis);
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.update(0.2);
+                ƒS.Sound.fade(sound.stars, 0, 0.1, false);
                 return "goThroughSchoolyard";
                 break;
 

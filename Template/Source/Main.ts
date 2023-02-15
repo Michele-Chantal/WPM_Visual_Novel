@@ -1,7 +1,7 @@
-namespace Template {
+namespace Remember {
   export import ƒ = FudgeCore;
   export import ƒS = FudgeStory;
-  console.log("FudgeStory template starting");
+  console.log("FudgeStory Remember starting");
 
   // Data that will be saved
   export let dataForSave = {
@@ -31,9 +31,7 @@ namespace Template {
   export let transition = {
     paintblobs: {
       duration: 1.1,
-      // keine absoluten Pfade, sondern relative Pfad
       alpha: "Images/Transitions/paintblobs.jpg",
-      // Härte der Transitions
       edge: 2
     },
     lines: {
@@ -50,13 +48,26 @@ namespace Template {
 
   // Sounds werden exportiert bzw. geladen
   export let sound = {
-    // Sounds unterscheiden in Themes, SFX etc.
     // Music/Themes
-
+    alone: "Audio/Music/alone.mp3",
+    assault: "Audio/Music/assault.mp3",
+    dawn: "Audio/Music/dawn.mp3",
+    lost: "Audio/Music/lost.mp3",
+    stars: "Audio/Music/stars.mp3",     
+    survivor: "Audio/Music/survivor.mp3",
 
     // SFX
-    drop: "Audio/drop.mp3"  //name of sound and the relative path to it, kann unbenannt werden
-
+    gunshot: "Audio/SFX/gunshot.mp3",
+    hit: "Audio/SFX/hit.mp3",
+    radio: "Audio/SFX/radio.mp3",
+    hitWithClub: "Audio/SFX/hit_with_club.mp3",
+    hitWithKnife: "Audio/SFX/hit_with_knife.mp3",
+    zombie: "Audio/SFX/zombie.mp3",
+    zombie2: "Audio/SFX/zombie2.mp3",
+    grunting: "Audio/SFX/grunting.wav",
+    running: "Audio/SFX/running.mp3",
+    bodyFall: "Audio/SFX/body_fall.mp3",
+    death: "Audio/SFX/death.wav"
   };
 
   // Locations bzw. Backgrounds der Szenen
@@ -145,8 +156,8 @@ namespace Template {
         happy: "Images/Characters/player_happy.png",
         happy2: "Images/Characters/player_happy2.png",
         sad: "Images/Characters/player_sad.png",
-        sad2: "Images/Characters/player_sad2.png",
-        angry: "Images/Characters/player_angry.png",
+        // sad2: "Images/Characters/player_sad2.png",
+        // angry: "Images/Characters/player_angry.png",
         surprised: "Images/Characters/player_surprised.png",
         confused: "Images/Characters/player_confused.png",
         hurt: "Images/Characters/player_hurt.png",
@@ -159,12 +170,12 @@ namespace Template {
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         neutral: "Images/Characters/lewis_neutral.png",
-        neutral2: "Images/Characters/lewis_neutral2.png",
+        // neutral2: "Images/Characters/lewis_neutral2.png",
         happy: "Images/Characters/lewis_happy.png",
         happy2: "Images/Characters/lewis_happy2.png",
         sad: "Images/Characters/lewis_sad.png",
-        sad2: "Images/Characters/lewis_sad2.png",
-        angry: "Images/Characters/lewis_angry.png",
+        // sad2: "Images/Characters/lewis_sad2.png",
+        // angry: "Images/Characters/lewis_angry.png",
         surprised: "Images/Characters/lewis_surprised.png",
         worried: "Images/Characters/lewis_worried.png",
         zombie: "Images/Characters/lewis_zombie.png"
@@ -219,49 +230,52 @@ namespace Template {
       origin: ƒS.ORIGIN.BOTTOMCENTER,
       pose: {
         catPic: "Images/Items/cat_pic.png",
-        golfClub: "Images/Items/golf_club.png",
         memory: "Images/Items/memory.png",
         red: "Images/Items/red.png",
-        // flower: "Images/Items/flower.png",       still unsure about this one
-        // rations: "Images/Items/rations.png",      still unsure about this one
-        // journal: "Images/Items/journal.png",      still unsure about this one
       }
     }
   }
 
-  export function animation(): ƒS.AnimationDefinition {
+  export function moveItemInFrame(): ƒS.AnimationDefinition {
     return {
-      start: { translation: ƒS.positions.bottomcenter, color: ƒS.Color.CSS("white", 1) },
-      end: { translation: ƒS.positions.bottomright, color: ƒS.Color.CSS("blue", 0) },
-      duration: 3,
-      playmode: ƒS.ANIMATION_PLAYMODE.LOOP
+      start: { translation: ƒS.positionPercent(110, 65), scaling: new ƒS.Position(1, 1) },
+      end: { translation: ƒS.positionPercent(70, 65), scaling: new  ƒS.Position(1, 1) },
+      duration: 0.5,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE,
     };
   }
 
-  // Animation that rotates and scales
-  export function getAnimation(): ƒS.AnimationDefinition {
+  export function playerGetsHit(): ƒS.AnimationDefinition {
     return {
-      start: { translation: ƒS.positions.bottomleft, rotation: -20, scaling: new ƒS.Position(0.5, 1.5), color: ƒS.Color.CSS("white", 0.3) },
-      end: { translation: ƒS.positions.bottomright, rotation: 20, scaling: new ƒS.Position(1.5, 0.5), color: ƒS.Color.CSS("red") },
-      duration: 1,
-      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE
+      start: { translation: ƒS.positionPercent(30, 100), scaling: new ƒS.Position(1, 1) },
+      end: { translation: ƒS.positionPercent(25, 100), scaling: new  ƒS.Position(1, 1) },
+      duration: 0.5,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE,
     };
   }
 
+  export function enemyGetsHit(): ƒS.AnimationDefinition {
+    return {
+      start: { translation: ƒS.positionPercent(70, 100), scaling: new ƒS.Position(1, 1) },
+      end: { translation: ƒS.positionPercent(75, 100), scaling: new  ƒS.Position(1, 1) },
+      duration: 0.5,
+      playmode: ƒS.ANIMATION_PLAYMODE.PLAYONCE,
+    };
+  }
 
   // Menu shortcuts
   let inGameMenuButtons = {
     save: "Save",
     load: "Load",
-    close: "Close",
+    journal: "Journal",
     credits: "Credits",
-    journal: "Journal"
+    close: "X",
   };
 
   let gameMenu: ƒS.Menu;
 
-  // open entspricht Menü ist offen und false zu
-  let menuIsOpen: boolean = true;
+  // true entspricht Menü ist offen und false zu
+  let menuIsOpen: boolean = false;
 
   // Funktionalitäten der Buttons
   async function buttonFunctionalities(_option: string): Promise<void> {
@@ -278,7 +292,7 @@ namespace Template {
         break;
       case inGameMenuButtons.credits:
         console.log("credits");
-        credits(); 
+        credits();
         break;
       case inGameMenuButtons.journal:
         journals();
@@ -315,27 +329,27 @@ namespace Template {
   window.addEventListener("load", start);
   function start(_event: Event): void {
     gameMenu = ƒS.Menu.create(inGameMenuButtons, buttonFunctionalities, "gameMenuCSSClass");
-    buttonFunctionalities("Close");   // soll von Anfang an geschlossen sein
+    buttonFunctionalities("X");   // soll von Anfang an geschlossen sein
+    ƒS.Speech.hide();
     // Scene Hierarchy
     let scenes: ƒS.Scenes = [
-      // { id: "Test", scene: testScene, name: "Test" },
-      // { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
+      { id: "Prologue", scene: prologue, name: "Prologue" },  // name: Description of the scene
       { id: "FirstScene", scene: firstScene, name: "First scene" },    // mit id kann man im Zusammenhang mit 'next' angeben, welche Szene als nächstes abgespielt wird
-      { id: "residentialArea", scene: routeResidentialArea, name: "Residential area"},
-      { id: "commercialArea", scene: routeCommercialArea, name: "Commercial area"},
-      { id: "meetingSurvivors", scene: meetingSurvivors, name: "Meeting Survivors"},
-      { id: "helpingTheSurvivors", scene: helpingTheSurvivors, name: "Helping the Survivors"},
-      { id: "callForHelp", scene: callForHelp, name: "Call for help"},
-      { id: "followCallForHelp", scene: followCallForHelp, name: "Follow the call for help"},
-      { id: "ignoreCallForHelp", scene: ignoreCallForHelp, name: "Ignore the call for help"},
-      { id: "rendezvous", scene: rendezvous, name: "Rendezvous"},
-      { id: "goWithLewis", scene: goWithLewis, name: "Go with Lewis"},
-      { id: "goThroughSideStreet", scene: goThroughSideStreet, name: "Go through side street"},
-      { id: "goThroughSchoolyard", scene: goThroughSchoolyard, name: "Go through schoolyard"},
+      { id: "residentialArea", scene: routeResidentialArea, name: "Residential area" },
+      { id: "commercialArea", scene: routeCommercialArea, name: "Commercial area" },
+      { id: "meetingSurvivors", scene: meetingSurvivors, name: "Meeting Survivors" },
+      { id: "helpingTheSurvivors", scene: helpingTheSurvivors, name: "Helping the Survivors" },
+      { id: "callForHelp", scene: callForHelp, name: "Call for help" },
+      { id: "followCallForHelp", scene: followCallForHelp, name: "Follow the call for help" },
+      { id: "ignoreCallForHelp", scene: ignoreCallForHelp, name: "Ignore the call for help" },
+      { id: "rendezvous", scene: rendezvous, name: "Rendezvous" },
+      { id: "goWithLewis", scene: goWithLewis, name: "Go with Lewis" },
+      { id: "goThroughSideStreet", scene: goThroughSideStreet, name: "Go through side street" },
+      { id: "goThroughSchoolyard", scene: goThroughSchoolyard, name: "Go through schoolyard" },
 
-      { id: "goodEnding1", scene: goodEnding1, name: "Good Ending 1"},
-      { id: "goodEnding2", scene: goodEnding2, name: "Good Ending 2"},
-      { id: "badEnding1", scene: badEnding1, name: "Bad Ending 1"},
+      { id: "goodEnding1", scene: goodEnding1, name: "Good Ending 1" },
+      { id: "goodEnding2", scene: goodEnding2, name: "Good Ending 2" },
+      { id: "badEnding", scene: badEnding, name: "Bad Ending " },
 
       { id: "emptyScene", scene: empty, name: "END" }
     ];

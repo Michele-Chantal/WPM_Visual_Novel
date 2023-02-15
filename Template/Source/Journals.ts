@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function journals() {
 
         let pages: string[] = ["<strong> How to survive the Zombie Apocalypse: </strong><br><br><br> - Avoid getting bitten => Infection will spread like that <br><br> \
@@ -21,7 +21,7 @@ namespace Template {
 
         if (dataForSave.novelRadio == true) {
             pages.push("<strong>Extraction </strong><br><br><br> The Military is organizing one last effort to safe some survivors. I wonder where they are bringing us \
-            and if we're really going to be safe there. Here is all the important information: <br><br><br> - Military base 'Delta' <br><br> - city northern edge <br><br> - last extraction in 8 hours");
+            and if we're really going to be safe there. Here is all the important information: <br><br> - Military base 'Delta' <br><br> - city northern edge <br><br> - last extraction in 8 hours");
             numberAquired += 1;
         }
 
@@ -55,37 +55,39 @@ namespace Template {
         if (dataForSave.novelLewis == true) {
             pages.push("I just met someone from my past, his name is Lewis. We served together in the military and after he got shot in the \
             shoulder in a battle I saved him and after that we became close, because he kept following me around. I guess I kind of just warmed up \
-            to him and it became normal to seek each other out.");
+            to him and it became normal to seek each other out. <br><br> According to him I joined the military when I was 20 years old and spent \
+            at least three years there. And I am 32 years old.");
             numberAquired += 1;
         }
 
         if (dataForSave.novelNoLewis == true) {
             pages.push("I just came across someone I knew from my past. His name <del>is</del> was Lewis and I met him in the military. <del>He</del> \
-            We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him he stuck by my side and \
+            We were <del>friends</del> <del>best friends</del> really close. After he got hurt badly in battle and I saved him, he stuck by my side and \
             over time we became unseperable. And now he's dead... I could have saved him, but I didn't. I should have followed my gut feelings. He was \
-            the only thing from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
+            the only thing left from my past that was in reach. <br><br> Now there is nothing left that needs remembering.");
             numberAquired += 1;
         }
 
         if (dataForSave.novelEnding2 == true) {
-            pages.push("Day 47 <br><br> We finally reached the cabin Lewis was talking about. It's a days walk from the city, but he was right \
+            pages.push("Day 47, <br><br> We finally reached the cabin Lewis was talking about. It's a days walk from the city, but he was right \
             it's in the middle of nowhere and also hidden from all main roads. At first we followed the main road leavig out of the city and \
             came across quite a few zombies. But halfway through we started heading through the forest and fields and found just a few stray zombies \
-            roaming around. <br><br> The cabin itself is quite cozy, but it's obvious that no one's been here in months. It's too big for just us \
+            roaming around.");
+            pages.push("The cabin itself is quite cozy, but it's obvious that no one's been here in months. It's too big for just us \
             two, but maybe someone will join us in time. And he was right, there's enough food here to last us a few weeks. But Lewis says he's \
             already has a plan. I trust him. It'll be some time, until this place will feel like home, but tidying everything up will be the first step.");
-            pages.push("Day 54 <br><br> We're still busy with the place and I haven't found much time to write. But I finally know what Lewis' plan \
+            pages.push("Day 54, <br><br> We're still busy with the place and I haven't found much time to write. But I finally know what Lewis' plan \
             was: He wants to plant some vegetables and fruits. He got the seeds from the garden center in the center, that's why he was there when I \
             found him. I have no idea about gardening, but he seems so know what he is doing.");
-            pages.push("Day 67 <br><br> It's peaceful here and not many zombies find their way all the way out here. <br><br> My \
+            pages.push("Day 67, <br><br> It's peaceful here and not many zombies find their way all the way out here. <br> My \
             memories are gradually returning and Lewis tries to fill in the blanks as good as he can. He has been a big help, not only in remembering \
-            but giving us a new place to call home and giving me a reason to keep fighting. <br><br> I remembered that I love fishing and we got lucky \
-            with a big lake not far from here. So fish is our main ingredient at the moment. Most of the time I cook, but Lewis helps from time to time \
-            He pretends that he's not had enough of fish yet, but I know he wouldn't mind a change. I hope the stuff we planted will be ready to harvest \
-            soon, then I could surprise him with his favourite dish. It's also getting time for another city run soon. Maybe we'll get lucky this time and \
-            find a functioning car. I don't mind the walk, but it can get tiring pretty quickly. Not that Lewis minds. He always loved walking. I wonder \
-            where he gets all the energy from...");
-            numberAquired += 3;
+            but giving us a new place to call home and giving me a reason to keep fighting. <br> I remembered that I love fishing and we got lucky \
+            with a big lake not far from here. So fish is our main ingredient at the moment. Most of the time I cook, but Lewis helps from time to time. \
+            He pretends that he's not had enough of fish yet, but I know he wouldn't mind a change.");
+            pages.push("I hope the stuff we planted will be ready to harvest soon, then I could surprise him with his favourite dish. <br> It's \
+            also getting time for another city run soon. Maybe we'll get lucky this time and find a functioning car. I don't mind the walk, but it \
+            can get tiring pretty quickly. Not that Lewis minds. He always loved walking. I wonder where he gets all the energy from...");
+            numberAquired += 5;
         }
 
 
@@ -108,7 +110,7 @@ namespace Template {
                 choice = await ƒS.Menu.getInput(changePage, "changePage");
                 switch (choice) {
                     case changePage.back: current = Math.max(0, current - 1); break;
-                    case changePage.next: current = Math.min(2, current + 1); break;
+                    case changePage.next: current = Math.min(3, current + 1); break;
                 }
             } while (choice != changePage.done);
         } ƒS.Text.close();

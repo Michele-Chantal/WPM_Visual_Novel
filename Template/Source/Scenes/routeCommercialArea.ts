@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function routeCommercialArea(): ƒS.SceneReturn {
 
         console.log("Scene: Commercial area");
@@ -10,10 +10,11 @@ namespace Template {
         ƒS.Speech.setTickerDelays(30, 5000);
 
         ƒS.Speech.hide();
+        ƒS.Sound.fade(sound.lost, 0.6, 0.1, true);
         await ƒS.Location.show(locations.restaurant);
         await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Narrator, "[At an abandoned restaurant]");
+        await ƒS.Speech.tell(characters.Narrator, "You enter an abandoned restaurant that looks like it's already been ransacked.");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Player, "This place looks better than the others I've seen, but I don't think there'll be anything left either.")
@@ -30,6 +31,7 @@ namespace Template {
         await ƒS.Speech.tell(characters.Player, "Nothing left for me here, it seems...");
         await ƒS.Speech.tell(characters.Player, "But I need to find something to drink soon, my throat's starting to hurt.");
         await ƒS.Speech.tell(characters.Player, "Hm, the menu...");
+        ƒS.Text.setClass("menu");
         await ƒS.Text.print("<strong>Menu</strong> <br><br> <i>SOUP AND SALAD</i> <br><br> Mango Chutney 2,95€ <br> Dal Soup 2,95€ <br> Cucumber Salad 3,50€ <br> \
         Mixed Salad 3,50€ <br> Raita 2,25€ <br><br> <i>MAIN DISHES</i> <br><br> Lamb Curry 11,95€ <br> Prawn Vindaloo 11,95€ <br> \
         Boti Kabab 12,95€ <br> Prawn Biryani 12,95€ <br><br> <i>DESSERTS</i> <br><br> Gulab Jamun 2,50€ <br> Kulfi 2,50€ <br> Kheer 2,50€");
@@ -53,6 +55,7 @@ namespace Template {
         await ƒS.Speech.tell(characters.Player, "Oh... right.");
         await ƒS.Speech.tell(characters.Player, "She passed away before she could when I was 16.");
         await ƒS.Speech.tell(characters.Player, "I should write that down...");
+        ƒS.Text.setClass("journal");
         await ƒS.Text.print("I remembered some things about my past. My favourite food is Mushroom Mattar. My mother always cooked it for me \
         when I did well in school or when she wanted to cheer me up. The way she made it was special and I remember it tasting like the most \
         delicious food I had ever eaten. <br> I tried recreating it for years, but never did quite manage to make it taste exactly like hers. She told \
@@ -61,18 +64,12 @@ namespace Template {
         won't have to see what happened to the world. <br><br><br> Rest well, Mom.");
         dataForSave.novelFavFood = true;
         await ƒS.Speech.tell(characters.Player, "...");
-        // await ƒS.Character.hide(characters.Player);
-        // await ƒS.update(0.2);
-        // await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
-        // await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Player, "I have to go on or I won't make it in time.");
         await ƒS.Character.hide(characters.Player);
         await ƒS.update(0.2);
         ƒS.Speech.clear();
-
+        ƒS.Sound.fade(sound.lost, 0, 0.1, false);
         return "meetingSurvivors";
-
-
     }
 
 }

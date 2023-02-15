@@ -1,0 +1,235 @@
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+  font-size: 18px;
+  background-color: #161b22;
+  overflow: hidden;
+}
+
+p {
+  z-index: 99999;
+}
+
+dialog[type=splash] {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+dialog[type=splash] img {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+dialog[type=splash]>img#FudgeStoryLogo {
+  width: 100%;
+  max-width: 400px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* margin: auto; */
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+scene {
+  width: 1280px;
+  height: 720px;
+  display: inline-block;
+  position: absolute;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+dialog[type=splash] {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+dialog[type=splash]>img#FudgeStoryLogo {
+  width: 100%;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+speech {
+  position: absolute;
+  bottom: 0px;
+  left: 50px;
+  padding: 20px;
+  color: white;
+  background-color: rgba(0, 0, 0);
+  border-radius: 12px;
+  width: 90%;
+  height: 12vh;
+  line-height: 1.4;
+}
+
+speech name {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bold;
+  color: #a81c07;
+  font-variant: small-caps;
+  font-size: 19px;
+  margin: 10px;
+}
+
+speech content {
+  font-size: 20px;
+  margin: 20px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+@font-face {
+  font-family: "Handwriting";
+  src: url("Fonts/ReenieBeanie-Regular.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Handwriting2";
+  src: url("Fonts/Caveat-Regular.ttf");
+  font-display: swap;
+}
+
+dialog[type=text] {
+  height: 460px;
+  width: 600px;
+  margin-top: 4%;
+  line-height: 1.5;
+  padding: 3%;
+  background-image: url(Images/Items/paper3.png);
+  background-position: center;
+  font-family: "Handwriting2";
+  font-size: 18pt;
+}
+
+dialog[class=changePage] {
+  margin-bottom: 20vh;
+}
+
+.choiceCSSClass {
+  background-color: rgba(239, 239, 239, 0.4);
+  border-radius: 10px;
+  border-color: rgba(71, 71, 71, 0.5);
+}
+
+.changePage {
+  padding: 5px;
+  border-radius: 5px;
+  background: transparent;
+  border-color: transparent;
+}
+
+button {
+  margin-right: 18px;
+  margin-left: 15px;
+  border-radius: 2px;
+  color: white;
+  background-color: rgb(184, 151, 107);
+  border-color: rgb(184, 151, 107);
+  font-size: medium;
+}
+
+button:active {
+  margin-right: 18px;
+  margin-left: 15px;
+  border-radius: 2px;
+  color: white;
+  background-color: rgb(90, 73, 51);
+  border-color: rgb(90, 73, 51);
+}
+
+button:hover {
+  margin-right: 18px;
+  margin-left: 15px;
+  border-radius: 2px;
+  color: white;
+  background-color: rgb(90, 73, 51);
+  border-color: rgb(90, 73, 51);
+}
+
+.gameMenuCSSClass {
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(0, 0, 0, 0.4);
+  border-color: transparent;
+}
+
+dialog[class=menu] {
+  background: rgb(255, 242, 213);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 15pt;
+}
+
+dialog[class=journal] {
+  background-image: url(Images/Items/paper3.png);
+  background-position: center;
+  font-family: "Handwriting2";
+  font-size: 18pt;
+}
+
+/***** METER BAR *****/
+
+/* Webkit bezieht sich auf Chrome */
+meter::-webkit-meter-bar {
+  background-color: #ececec;
+}
+
+/* Mit Positionen ausprobieren */
+meter[id="damageMeter"] {
+  position: absolute;
+  transform: rotate(-90deg);
+  bottom: 50%;
+  left: -14%;
+  width: 35%;
+  height: 10%;
+}
+
+/* Gestaltung der Füllung der Meterbar */
+meter[id="damageMeter"]::-webkit-meter-optimum-value {
+  background-image: linear-gradient(90deg,
+      #8bcf69 5%,
+      #f0d62b 25%,
+      #ffa127 50%,
+      #d85d2c 75%,
+      #b33030 100%);
+}
+
+/* Text ändern und Positionierung */
+input[id="scoreForDamage"] {
+  color: rgb(255, 248, 253);
+  background-color: rgb(49, 47, 48);
+  font-size: 10pt;
+  position: absolute;
+  left: 1.2%;
+  bottom: 19.5%;
+  width: 4%;
+  border-radius: 10%;
+}

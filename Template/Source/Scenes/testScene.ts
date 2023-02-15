@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function testScene(): ƒS.SceneReturn {
 
         console.log("Test Scene");

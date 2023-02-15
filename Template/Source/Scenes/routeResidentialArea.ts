@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function routeResidentialArea(): ƒS.SceneReturn {
 
         console.log("Residential area");
@@ -11,16 +11,17 @@ namespace Template {
 
         ƒS.Speech.hide();
         await ƒS.Location.show(locations.kitchen);
+        ƒS.Sound.fade(sound.lost, 0.6, 0.1, true);
         await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
-        await ƒS.Speech.tell(characters.Narrator, "[In an abandoned apartment]");
+        await ƒS.Speech.tell(characters.Narrator, "You enter an abandoned apartment that looks like it hasn't been stepped into in months.");
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Player, "This place looks like it was untouched by the apocalypse. Guess the residents never \
         came back after it started.");
         await ƒS.Speech.tell(characters.Player, "Hopefully there'll be some still-edible stuff I can take.");
         await ƒS.Character.hide(characters.Player);
-        await ƒS.update(0.1);
+        await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Narrator, "You rummage through the cabinets and cupboards in search for rations and find a bottle of \
         water and three granola bars.");
         dataForSave.pickedUpRations = true;
@@ -30,7 +31,7 @@ namespace Template {
         await ƒS.Speech.tell(characters.Player, "Let's see what else is here.");
         ƒS.Speech.hide();
         await ƒS.Character.hide(characters.Player);
-        await ƒS.update(0.1);
+        await ƒS.update(0.3);
         await ƒS.Location.show(locations.livingRoom);
         await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
@@ -41,7 +42,7 @@ namespace Template {
         dataForSave.pickedUpBat = true;
         await ƒS.Speech.tell(characters.Narrator, "You notice some photos on one of the cabinets.");
         await ƒS.Speech.tell(characters.Player, "I wonder who lived here before.");
-        await ƒS.Character.show(characters.Others, characters.Others.pose.catPic, ƒS.positionPercent(70, 70))
+        await ƒS.Character.animate(characters.Others, characters.Others.pose.catPic, moveItemInFrame());
         await ƒS.update(0.2);
         await ƒS.Speech.tell(characters.Player, "A cat. Cute.");
         await ƒS.Speech.tell(characters.Player, "Did I have any pets?");
@@ -73,7 +74,7 @@ namespace Template {
         await ƒS.Character.hide(characters.Player);
         await ƒS.update(0.2);
         ƒS.Speech.clear();
-
+        ƒS.Sound.fade(sound.lost, 0, 0.1, false);
         return "meetingSurvivors";
     }
 

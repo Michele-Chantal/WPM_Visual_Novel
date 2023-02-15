@@ -1,4 +1,4 @@
-namespace Template {
+namespace Remember {
     export async function meetingSurvivors(): ƒS.SceneReturn {
 
         console.log("Scene: Meeting survivors");
@@ -10,6 +10,7 @@ namespace Template {
         ƒS.Speech.setTickerDelays(30, 5000);
 
         ƒS.Speech.hide();
+        ƒS.Sound.fade(sound.lost, 0.6, 0.1, true);
         await ƒS.Location.show(locations.oldStreet);
         await ƒS.update(transition.paintblobs.duration, transition.paintblobs.alpha, transition.paintblobs.edge);
         await ƒS.update(0.2);
@@ -46,6 +47,7 @@ namespace Template {
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.Character.hide(characters.SurvivorM);
                 await ƒS.update(0.2);
+                ƒS.Sound.fade(sound.lost, 0, 0.1, false);
                 return "helpingTheSurvivors";
                 break;
 
@@ -62,6 +64,7 @@ namespace Template {
                 await ƒS.Speech.tell(characters.Player, "...");
                 await ƒS.Character.hide(characters.Player);
                 await ƒS.update(0.2);
+                ƒS.Sound.fade(sound.lost, 0, 0.1, false);
                 return "callForHelp";
                 break;
 

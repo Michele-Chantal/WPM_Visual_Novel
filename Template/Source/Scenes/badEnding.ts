@@ -1,7 +1,11 @@
-namespace Template {
-    export async function badEnding1(): ƒS.SceneReturn {
+namespace Remember {
+    export async function badEnding(): ƒS.SceneReturn {
 
-        console.log("Scene: Bad Ending 1");
+        console.log("Scene: Bad Ending");
+
+        dataForSave.pickedMeterScene = true;
+        document.getElementsByName("damageScore").forEach(meterStuff => meterStuff.hidden = true);
+        document.getElementById("scoreForDamage").style.display = "none";
 
         ƒS.Speech.setTickerDelays(30, 5000); 
 
