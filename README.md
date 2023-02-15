@@ -22,7 +22,7 @@ A FUDGE module for the easy development of interactive stories, visual novels an
   * Die Projektordner inklusive aller erforderlichen Dateien, also auch Bild- und Audiodaten
 
 ##  Abgabe
-- Link zum Spiel: https://michele-chantal.github.io/WPM_Visual_Novel/Template/Remember.html <br>
+- Link zum Spiel: https://michele-chantal.github.io/WPM_Visual_Novel/Remember/Remember.html <br>
 - Quellcode: https://github.com/Michele-Chantal/WPM_Visual_Novel/tree/main/Remember <br>
 - Konzept https://github.com/Michele-Chantal/WPM_Visual_Novel/tree/main/Konzept <br>
-- ZIP-Ordner: 
+- ZIP-Ordner: https://drive.google.com/file/d/168kFgCcgRmNN9L9aVYbelJanT-ptH_2b/view?usp=share_link
