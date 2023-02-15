@@ -18,6 +18,11 @@ namespace Remember {
         await ƒS.Character.show(characters.Lewis, characters.Lewis.pose.neutral, ƒS.positionPercent(75, 100));
         await ƒS.update(0.5);
         await ƒS.Speech.tell(characters.Lewis, "This way.");
+        await ƒS.Speech.tell(characters.Narrator, "You keep walking for some minutes, when suddenly your head feels like you're underwater \
+        and your sight gets blurry for a moment. You stumble but Lewis catches you. With one hand he keeps you steady and with the other he gives \
+        you his water with a worried smile.");
+        await ƒS.Speech.tell(characters.Player, "Thanks.");
+        await ƒS.Speech.tell(characters.Narrator, "You drink a bit and then continue on.");
         await ƒS.Speech.tell(characters.Player, "...");
         await ƒS.Speech.tell(characters.Player, "You called me 'Rush'. Why?");
         await ƒS.Character.hide(characters.Lewis);

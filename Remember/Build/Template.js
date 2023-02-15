@@ -41,7 +41,7 @@ var Remember;
         if (Remember.dataForSave.novelSurvivors == true) {
             pages.push("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
             VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
-            but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+            but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
             tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
             so well for the robbers. In the end they got no money and landed in jail.");
             numberAquired += 1;
@@ -776,7 +776,7 @@ var Remember;
         await Remember.ƒS.Speech.tell(Remember.characters.Lewis, "I hope I didn't inconvenience you or seperate you from your group.");
         await Remember.ƒS.Speech.tell(Remember.characters.Player, "No, I'm... traveling alone.");
         await Remember.ƒS.Speech.tell(Remember.characters.Lewis, "Great!");
-        await Remember.ƒS.Speech.tell(Remember.characters.Lewis, "I mean, I was planing to leave the city, I know of a cabin some way from the city. \
+        await Remember.ƒS.Speech.tell(Remember.characters.Lewis, "I mean, I was planning to leave the city, I know of a cabin some way from the city. \
         It belonged to my uncle and he mostly used it to get away from all the stress and work, so it should be stocked. If you don't have any \
         other plans you could come with me.");
         await Remember.ƒS.Speech.tell(Remember.characters.Player, "But you don't even know me.");
@@ -1221,6 +1221,11 @@ var Remember;
         await Remember.ƒS.Character.show(Remember.characters.Lewis, Remember.characters.Lewis.pose.neutral, Remember.ƒS.positionPercent(75, 100));
         await Remember.ƒS.update(0.5);
         await Remember.ƒS.Speech.tell(Remember.characters.Lewis, "This way.");
+        await Remember.ƒS.Speech.tell(Remember.characters.Narrator, "You keep walking for some minutes, when suddenly your head feels like you're underwater \
+        and your sight gets blurry for a moment. You stumble but Lewis catches you. With one hand he keeps you steady and with the other he gives \
+        you his water with a worried smile.");
+        await Remember.ƒS.Speech.tell(Remember.characters.Player, "Thanks.");
+        await Remember.ƒS.Speech.tell(Remember.characters.Narrator, "You drink a bit and then continue on.");
         await Remember.ƒS.Speech.tell(Remember.characters.Player, "...");
         await Remember.ƒS.Speech.tell(Remember.characters.Player, "You called me 'Rush'. Why?");
         await Remember.ƒS.Character.hide(Remember.characters.Lewis);
@@ -1383,7 +1388,6 @@ var Remember;
         await Remember.ƒS.update(0.2);
         await Remember.ƒS.Character.show(Remember.characters.Player, Remember.characters.Player.pose.neutral, Remember.ƒS.positionPercent(30, 100));
         await Remember.ƒS.update(0.5);
-        Remember.dataForSave.pickedUpRations = true;
         if (Remember.dataForSave.pickedUpBat == false) {
             await Remember.ƒS.Speech.tell(Remember.characters.Narrator, "You pull out your knife and quietly sneak towards the closest zombie.");
             await Remember.ƒS.Speech.tell(Remember.characters.Narrator, " You manage to take this one and the next two down without a hitch. But as you sneak up on \
@@ -1493,7 +1497,7 @@ var Remember;
                     Remember.dataForSave.novelSurvivors = true;
                     await Remember.ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
                     VIP that had been taken hostage by a shady organization that was trying get rich by robbing a bank. <br> They didn't expect the military to show up \
-                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
                     tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
                     end so well for the robbers. In the end they got no money and landed in jail.");
                     await Remember.ƒS.Character.hide(Remember.characters.Player);
@@ -1517,7 +1521,7 @@ var Remember;
                     Remember.dataForSave.novelSurvivors = true;
                     await Remember.ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
                     VIP that had been taken hostage by a shady organization that was trying get rich by robbing a bank. <br> They didn't expect the military to show up \
-                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
                     tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
                     end so well for the robbers. In the end they got no money and landed in jail.");
                     await Remember.ƒS.Character.hide(Remember.characters.Player);
@@ -1549,7 +1553,7 @@ var Remember;
                     Remember.dataForSave.novelSurvivors = true;
                     await Remember.ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
                     VIP that had been taken hostage by a shady organization that was trying get rich by robbing a bank. <br> They didn't expect the military to show up \
-                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
                     tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
                     end so well for the robbers. In the end they got no money and landed in jail.");
                     await Remember.ƒS.Character.hide(Remember.characters.Player);

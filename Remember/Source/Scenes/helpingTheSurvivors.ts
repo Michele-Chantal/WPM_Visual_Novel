@@ -15,7 +15,6 @@ namespace Remember {
         await ƒS.update(0.2);
         await ƒS.Character.show(characters.Player, characters.Player.pose.neutral, ƒS.positionPercent(30, 100));
         await ƒS.update(0.5);
-        dataForSave.pickedUpRations = true;
 
         if (dataForSave.pickedUpBat == false) {
             await ƒS.Speech.tell(characters.Narrator, "You pull out your knife and quietly sneak towards the closest zombie.");
@@ -130,7 +129,7 @@ namespace Remember {
                     dataForSave.novelSurvivors = true;
                     await ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
                     VIP that had been taken hostage by a shady organization that was trying get rich by robbing a bank. <br> They didn't expect the military to show up \
-                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
                     tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
                     end so well for the robbers. In the end they got no money and landed in jail.");
                     await ƒS.Character.hide(characters.Player);
@@ -155,7 +154,7 @@ namespace Remember {
                     dataForSave.novelSurvivors = true;
                     await ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
                     VIP that had been taken hostage by a shady organization that was trying get rich by robbing a bank. <br> They didn't expect the military to show up \
-                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
                     tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
                     end so well for the robbers. In the end they got no money and landed in jail.");
                     await ƒS.Character.hide(characters.Player);
@@ -188,7 +187,7 @@ namespace Remember {
                     dataForSave.novelSurvivors = true;
                     await ƒS.Text.print("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
                     VIP that had been taken hostage by a shady organization that was trying get rich by robbing a bank. <br> They didn't expect the military to show up \
-                    but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+                    but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
                     tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
                     end so well for the robbers. In the end they got no money and landed in jail.");
                     await ƒS.Character.hide(characters.Player);

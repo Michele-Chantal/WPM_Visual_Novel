@@ -46,7 +46,7 @@ namespace Remember {
         if (dataForSave.novelSurvivors == true) {
             pages.push("Finding and helping the survivors made me remember a specific mission I did while in the military. We had to save a \
             VIP that had been taken hostage by a shady organization that was trying get rich through. They didn't expect the military to show up \
-            but that could have been avoided if they had did their research right. They thought they just had a higher-up worker at the bank they had \
+            but that could have been avoided if they had done their research right. They thought they just had a higher-up worker at the bank they had \
             tried to rob. But what they didn't know was that she was also the chief's daughter. We managed to get her out of there safely, but it didn't \
             so well for the robbers. In the end they got no money and landed in jail.");
             numberAquired += 1;

@@ -78,7 +78,7 @@ namespace Remember {
         await ƒS.Speech.tell(characters.Lewis, "I hope I didn't inconvenience you or seperate you from your group.");
         await ƒS.Speech.tell(characters.Player, "No, I'm... traveling alone.");
         await ƒS.Speech.tell(characters.Lewis, "Great!");
-        await ƒS.Speech.tell(characters.Lewis, "I mean, I was planing to leave the city, I know of a cabin some way from the city. \
+        await ƒS.Speech.tell(characters.Lewis, "I mean, I was planning to leave the city, I know of a cabin some way from the city. \
         It belonged to my uncle and he mostly used it to get away from all the stress and work, so it should be stocked. If you don't have any \
         other plans you could come with me.");
         await ƒS.Speech.tell(characters.Player, "But you don't even know me.");
